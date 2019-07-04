@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <!-- Configuring JDBC properties -->
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/alzheimerdb</property>
+    <property name="hibernate.connection.username">alzheimerdb</property>
+    <property name="hibernate.connection.password">alzheimerdb1987</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <!-- Hibernate properties -->
+    <property name="hibernate.show_sql">true</property>
+    <property name="hibernate.format_sql">true</property>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
+    <property name="hibernate.hbm2ddl.auto">validate</property>
+    <!-- Specifying Session Context -->
+    <property name="hibernate.current_session_context_class">org.hibernate.context.internal.ThreadLocalSessionContext</property>
+    <mapping resource="com/alzheimer/models/Consultas.hbm.xml"/>
+    <mapping resource="com/alzheimer/models/Examenes.hbm.xml"/>
+    <mapping resource="com/alzheimer/models/Pacientes.hbm.xml"/>
+    <mapping resource="com/alzheimer/models/Usuarios.hbm.xml"/>
+    <mapping resource="com/alzheimer/models/Imagenes.hbm.xml"/>
+    <mapping resource="com/alzheimer/models/Parentescos.hbm.xml"/>
+    <mapping resource="com/alzheimer/models/Roles.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>
