@@ -19,7 +19,7 @@ import javax.persistence.Table;
 @Table(name="imagenes"
     ,catalog="alzheimerdb"
 )
-public class Imagenes  implements java.io.Serializable {
+public class Imagenes extends Model<Imagenes>  implements java.io.Serializable {
 
 
      private ImagenesId id;

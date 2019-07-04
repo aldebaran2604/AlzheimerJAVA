@@ -20,7 +20,7 @@ import javax.persistence.Table;
 @Table(name="parentescos"
     ,catalog="alzheimerdb"
 )
-public class Parentescos  implements java.io.Serializable {
+public class Parentescos extends Model<Parentescos>  implements java.io.Serializable {
 
 
      private Integer id;
