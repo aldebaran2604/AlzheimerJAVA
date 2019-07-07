@@ -5,18 +5,16 @@
  */
 package com.alzheimer.views;
 
-import javax.swing.ImageIcon;
-
 /**
  *
  * @author aldebaran
  */
-public class Inicio extends javax.swing.JPanel {
+public class VInicio extends javax.swing.JPanel {
 
     /**
      * Creates new form Inicio
      */
-    public Inicio() {
+    public VInicio() {
         initComponents();
         this.setVisible(true);
     }

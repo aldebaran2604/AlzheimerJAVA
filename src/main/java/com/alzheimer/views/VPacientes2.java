@@ -5,24 +5,19 @@
  */
 package com.alzheimer.views;
 
-import com.alzheimer.models.Roles;
-import com.alzheimer.models.Usuarios;
-import com.alzheimer.utilities.SessionFactoryHelper;
-import java.util.List;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.hibernate.query.Query;
+import com.alzheimer.custom_controls.CustomTableModelPacientes;
+import com.alzheimer.models.Pacientes;
 
 /**
  *
  * @author aldebaran
  */
-public class Medicos extends javax.swing.JFrame {
+public class VPacientes2 extends javax.swing.JFrame {
 
     /**
-     * Creates new form Doctors
+     * Creates new form Pacientes
      */
-    public Medicos() {
+    public VPacientes2() {
         initComponents();
         inicialialiacion();
     }
@@ -38,14 +33,16 @@ public class Medicos extends javax.swing.JFrame {
 
         btngSexo = new javax.swing.ButtonGroup();
         jToolBar = new javax.swing.JToolBar();
-        btnGuardar = new javax.swing.JButton();
+        btnNuevo = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
         btnBorrar = new javax.swing.JButton();
         btnArriba = new javax.swing.JButton();
         btnAbajo = new javax.swing.JButton();
+        btnConsultas = new javax.swing.JButton();
         jTabbedPane = new javax.swing.JTabbedPane();
         jspLista = new javax.swing.JScrollPane();
-        jtMedicos = new javax.swing.JTable();
+        jtPacientes = new javax.swing.JTable();
         jspDetalle = new javax.swing.JScrollPane();
         jpDetalle = new javax.swing.JPanel();
         lbNombre = new javax.swing.JLabel();
@@ -61,19 +58,22 @@ public class Medicos extends javax.swing.JFrame {
         jRadioButton2 = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Medicos");
+        setTitle("Pacientes");
 
         jToolBar.setRollover(true);
 
-        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/imagenes/save.png"))); // NOI18N
-        btnGuardar.setToolTipText("Save");
-        btnGuardar.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        btnGuardar.setMaximumSize(new java.awt.Dimension(24, 24));
-        btnGuardar.setMinimumSize(new java.awt.Dimension(24, 24));
-        jToolBar.add(btnGuardar);
+        btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/imagenes/new.png"))); // NOI18N
+        btnNuevo.setToolTipText("Nuevo");
+        btnNuevo.setFocusable(false);
+        btnNuevo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnNuevo.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        btnNuevo.setMaximumSize(new java.awt.Dimension(24, 24));
+        btnNuevo.setMinimumSize(new java.awt.Dimension(24, 24));
+        btnNuevo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar.add(btnNuevo);
 
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/imagenes/edit.png"))); // NOI18N
-        btnEditar.setToolTipText("Save");
+        btnEditar.setToolTipText("Editar");
         btnEditar.setFocusable(false);
         btnEditar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnEditar.setMargin(new java.awt.Insets(0, 0, 0, 0));
@@ -82,8 +82,15 @@ public class Medicos extends javax.swing.JFrame {
         btnEditar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar.add(btnEditar);
 
+        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/imagenes/save.png"))); // NOI18N
+        btnGuardar.setToolTipText("Guardar");
+        btnGuardar.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        btnGuardar.setMaximumSize(new java.awt.Dimension(24, 24));
+        btnGuardar.setMinimumSize(new java.awt.Dimension(24, 24));
+        jToolBar.add(btnGuardar);
+
         btnBorrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/imagenes/delete.png"))); // NOI18N
-        btnBorrar.setToolTipText("Save");
+        btnBorrar.setToolTipText("Eliminar");
         btnBorrar.setFocusable(false);
         btnBorrar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnBorrar.setMargin(new java.awt.Insets(0, 0, 0, 0));
@@ -93,7 +100,7 @@ public class Medicos extends javax.swing.JFrame {
         jToolBar.add(btnBorrar);
 
         btnArriba.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/imagenes/up.png"))); // NOI18N
-        btnArriba.setToolTipText("Save");
+        btnArriba.setToolTipText("Subir");
         btnArriba.setFocusable(false);
         btnArriba.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnArriba.setMargin(new java.awt.Insets(0, 0, 0, 0));
@@ -103,7 +110,7 @@ public class Medicos extends javax.swing.JFrame {
         jToolBar.add(btnArriba);
 
         btnAbajo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/imagenes/down.png"))); // NOI18N
-        btnAbajo.setToolTipText("Save");
+        btnAbajo.setToolTipText("Bajar");
         btnAbajo.setFocusable(false);
         btnAbajo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnAbajo.setMargin(new java.awt.Insets(0, 0, 0, 0));
@@ -112,30 +119,18 @@ public class Medicos extends javax.swing.JFrame {
         btnAbajo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar.add(btnAbajo);
 
-        jtMedicos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+        btnConsultas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/imagenes/treatment.png"))); // NOI18N
+        btnConsultas.setToolTipText("Consultas");
+        btnConsultas.setFocusable(false);
+        btnConsultas.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnConsultas.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        btnConsultas.setMaximumSize(new java.awt.Dimension(24, 24));
+        btnConsultas.setMinimumSize(new java.awt.Dimension(24, 24));
+        btnConsultas.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar.add(btnConsultas);
 
-            },
-            new String [] {
-                "ID", "Nombre", "Apellido Paterno", "Apellido Materno", "Fecha de Nacimiento", "Sexo"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, true
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jspLista.setViewportView(jtMedicos);
+        jtPacientes.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        jspLista.setViewportView(jtPacientes);
 
         jTabbedPane.addTab("Lista", jspLista);
 
@@ -222,28 +217,35 @@ public class Medicos extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(jToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(jTabbedPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE))
+                .addComponent(jTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    // <editor-fold defaultstate="collapsed" desc="Métodos"> 
-    private void inicialialiacion() {
-        Roles r = new Roles();
-        r.getList();
+    // <editor-fold defaultstate="collapsed" desc="Métodos">  
+    
+    private void inicialialiacion(){
+        cargarPacientes();
     }
+    
+    private void cargarPacientes(){
+        jtPacientes.setModel(new CustomTableModelPacientes(){{
+            addRows(new Pacientes().getList());
+        }});
+    }
+    
     // </editor-fold>
     
-    public static void main(String args[]) {
+    /*public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -252,28 +254,30 @@ public class Medicos extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Medicos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VPacientes2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Medicos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VPacientes2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Medicos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VPacientes2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Medicos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VPacientes2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-    
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Medicos().setVisible(true);
+                new VPacientes2().setVisible(true);
             }
         });
-    }
-    
+    }*/
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAbajo;
     private javax.swing.JButton btnArriba;
     private javax.swing.JButton btnBorrar;
+    private javax.swing.JButton btnConsultas;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnNuevo;
     private javax.swing.ButtonGroup btngSexo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JRadioButton jRadioButton1;
@@ -283,7 +287,7 @@ public class Medicos extends javax.swing.JFrame {
     private javax.swing.JPanel jpDetalle;
     private javax.swing.JScrollPane jspDetalle;
     private javax.swing.JScrollPane jspLista;
-    private javax.swing.JTable jtMedicos;
+    private javax.swing.JTable jtPacientes;
     private javax.swing.JTextField jtfApellicoMaterno;
     private javax.swing.JTextField jtfApellidoPaterno;
     private javax.swing.JTextField jtfFechaNacimiento;

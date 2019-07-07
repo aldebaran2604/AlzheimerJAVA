@@ -9,7 +9,7 @@ package com.alzheimer.views;
  *
  * @author aldebaran
  */
-public class LoginDialog extends javax.swing.JDialog {
+public class VLoginDialog extends javax.swing.JDialog {
 
     // <editor-fold defaultstate="collapsed" desc="Propiedades">
     private boolean verificacion = false;
@@ -19,7 +19,7 @@ public class LoginDialog extends javax.swing.JDialog {
     /**
      * Creates new form LoginDialog
      */
-    public LoginDialog(java.awt.Frame parent, boolean modal) {
+    public VLoginDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         Inicializa();
@@ -28,7 +28,7 @@ public class LoginDialog extends javax.swing.JDialog {
     /**
      * Creates new form LoginDialog Modal
      */
-    public LoginDialog(java.awt.Frame parent) {
+    public VLoginDialog(java.awt.Frame parent) {
         super(parent, true);
         initComponents();
         Inicializa();
@@ -62,14 +62,22 @@ public class LoginDialog extends javax.swing.JDialog {
         lbPassword.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lbPassword.setText("Contraseña:");
 
-        btnAceptar.setText("Aceptar");
+        btnAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/imagenes/accept.png"))); // NOI18N
+        btnAceptar.setToolTipText("Aceptar");
+        btnAceptar.setMaximumSize(new java.awt.Dimension(43, 43));
+        btnAceptar.setMinimumSize(new java.awt.Dimension(43, 43));
+        btnAceptar.setPreferredSize(new java.awt.Dimension(43, 43));
         btnAceptar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnAceptarMouseClicked(evt);
             }
         });
 
-        btnCancelar.setText("Cancelar");
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/imagenes/cancel.png"))); // NOI18N
+        btnCancelar.setToolTipText("Cancelar");
+        btnCancelar.setMaximumSize(new java.awt.Dimension(43, 43));
+        btnCancelar.setMinimumSize(new java.awt.Dimension(43, 43));
+        btnCancelar.setPreferredSize(new java.awt.Dimension(43, 43));
         btnCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnCancelarMouseClicked(evt);
@@ -85,24 +93,22 @@ public class LoginDialog extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbPassword)
-                            .addComponent(lbUsuario))
-                        .addGap(35, 35, 35)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
-                            .addComponent(txtUsuario))
-                        .addContainerGap(21, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnAceptar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnCancelar)
-                        .addGap(24, 24, 24))))
+                    .addComponent(lbPassword)
+                    .addComponent(lbUsuario))
+                .addGap(35, 35, 35)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                    .addComponent(txtUsuario))
+                .addContainerGap(21, Short.MAX_VALUE))
             .addComponent(jSeparator1)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -118,10 +124,10 @@ public class LoginDialog extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAceptar)
-                    .addComponent(btnCancelar))
-                .addGap(0, 13, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 16, Short.MAX_VALUE))
         );
 
         pack();
