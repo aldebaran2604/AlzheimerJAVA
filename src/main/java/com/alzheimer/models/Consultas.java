@@ -102,7 +102,10 @@ public class Consultas extends Model<Consultas> implements java.io.Serializable 
     }
 */
 
-
+    @Override
+    public String toString() {
+        return "Consultas{" + "id=" + id + ", pacientes=" + pacientes + ", usuarios=" + usuarios + ", fecha=" + fecha + ", exameneses=" + exameneses + '}';
+    }
 
 }
 

@@ -147,7 +147,7 @@ public class Usuarios extends Model<Usuarios> implements java.io.Serializable {
     public String toString() {
         return "Usuarios{" + "id=" + id + ", roles=" + roles + ", nombres=" + nombres + ", apellidoPaterno=" + apellidoPaterno + ", apellidoMaterno=" + apellidoMaterno + ", fechaNacimiento=" + fechaNacimiento + ", sexo=" + sexo + '}';
     }
-
+    
 }
 
 

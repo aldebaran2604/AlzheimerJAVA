@@ -22,15 +22,12 @@ public class Model<T> {
     public List<T> getList() {
         List<T> lista = new ArrayList<>();
         Session session = null;
-        Transaction transaction = null;
         try{
             session = SessionFactoryHelper.getSessionFactory().openSession();
             Query query = session.createQuery("from " + this.getClass().getSimpleName());
             lista = query.list();
         }catch(HibernateException ex){
-            if(transaction != null){
-                transaction.rollback();
-            }
+            
         }finally{
             if(session != null){
                 session.close();
