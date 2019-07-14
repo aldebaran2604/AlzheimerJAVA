@@ -11,13 +11,23 @@ package com.alzheimer.views;
  */
 public class VInicio extends javax.swing.JPanel {
 
+    // <editor-fold defaultstate="collapsed" desc="Propiedades">
+    
+    private static VInicio instance = null;
+    
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Constructores">
     /**
      * Creates new form Inicio
      */
     public VInicio() {
         initComponents();
-        this.setVisible(true);
+        inicializar();
     }
+    
+    // </editor-fold>
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -51,34 +61,42 @@ public class VInicio extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addContainerGap()
                 .addComponent(lbNombreMedico)
-                .addGap(43, 43, 43)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                 .addComponent(jpImagen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(lbNombreMedico))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jpImagen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(lbNombreMedico)
+                    .addComponent(jpImagen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(116, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     // <editor-fold defaultstate="collapsed" desc="Métodos">
     
-    private void inicializa() {
+    public static VInicio getInstance(){
+        if(instance == null){
+            instance = new VInicio();
+        }
+        return instance;
     }
     
-    // </editor-fold>  
+    public void inicializar(){
+        this.validate();
+    }
+    
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Variables">
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jpImagen;
     private javax.swing.JLabel lbNombreMedico;
     // End of variables declaration//GEN-END:variables
+    // </editor-fold> 
 }

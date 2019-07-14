@@ -5,15 +5,10 @@
  */
 package com.alzheimer;
 
-import com.alzheimer.models.Roles;
-import com.alzheimer.models.Usuarios;
-import com.alzheimer.utilities.SessionFactoryHelper;
+import com.alzheimer.utilities.*;
+import com.alzheimer.views.*;
 import java.awt.EventQueue;
-import java.util.Date;
-import java.util.List;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.hibernate.query.Query;
+import java.awt.GridBagConstraints;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -24,14 +19,17 @@ import org.springframework.context.ConfigurableApplicationContext;
  */
 @SpringBootApplication
 public class Application extends javax.swing.JFrame {
-
+    
+    // <editor-fold defaultstate="collapsed" desc="Constructores">
     /**
      * Creates new form Application
      */
     public Application() {
         initComponents();
-        Inicializador();
+        inicialialiacion();
     }
+    
+    // </editor-fold>
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -43,6 +41,7 @@ public class Application extends javax.swing.JFrame {
     private void initComponents() {
 
         jspContenedor = new javax.swing.JScrollPane();
+        jpContenedor = new javax.swing.JPanel();
         jmbMenuOpciones = new javax.swing.JMenuBar();
         jmArchivo = new javax.swing.JMenu();
         jmiInicio = new javax.swing.JMenuItem();
@@ -55,14 +54,30 @@ public class Application extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Alzheimer");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setPreferredSize(new java.awt.Dimension(600, 400));
         setResizable(false);
+        setSize(new java.awt.Dimension(600, 400));
+
+        javax.swing.GroupLayout jpContenedorLayout = new javax.swing.GroupLayout(jpContenedor);
+        jpContenedor.setLayout(jpContenedorLayout);
+        jpContenedorLayout.setHorizontalGroup(
+            jpContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 598, Short.MAX_VALUE)
+        );
+        jpContenedorLayout.setVerticalGroup(
+            jpContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 477, Short.MAX_VALUE)
+        );
+
+        jspContenedor.setViewportView(jpContenedor);
 
         jmArchivo.setText("Archivo");
 
         jmiInicio.setText("Inicio");
         jmiInicio.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jmiInicioMouseClicked(evt);
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jmiInicioMousePressed(evt);
             }
         });
         jmArchivo.add(jmiInicio);
@@ -70,8 +85,8 @@ public class Application extends javax.swing.JFrame {
         jmiSalir.setText("Salir");
         jmiSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jmiSalir.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jmiSalirMouseClicked(evt);
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jmiSalirMousePressed(evt);
             }
         });
         jmArchivo.add(jmiSalir);
@@ -81,6 +96,11 @@ public class Application extends javax.swing.JFrame {
         jmMedicos.setText("Medicos");
 
         jmiMedicosRegistro.setText("Registro");
+        jmiMedicosRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jmiMedicosRegistroMousePressed(evt);
+            }
+        });
         jmMedicos.add(jmiMedicosRegistro);
 
         jmbMenuOpciones.add(jmMedicos);
@@ -88,9 +108,19 @@ public class Application extends javax.swing.JFrame {
         jmPacientes.setText("Pacientes");
 
         jmiPacienteRegistro.setText("Registro");
+        jmiPacienteRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jmiPacienteRegistroMousePressed(evt);
+            }
+        });
         jmPacientes.add(jmiPacienteRegistro);
 
         jmiHistoricos.setText("Historicos");
+        jmiHistoricos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jmiHistoricosMousePressed(evt);
+            }
+        });
         jmPacientes.add(jmiHistoricos);
 
         jmbMenuOpciones.add(jmPacientes);
@@ -101,64 +131,88 @@ public class Application extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jspContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(jspContenedor)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jspContenedor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+            .addComponent(jspContenedor, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
-    // <editor-fold defaultstate="collapsed" desc="Eventos"> 
-    private void jmiSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiSalirMouseClicked
-        
-    }//GEN-LAST:event_jmiSalirMouseClicked
+    // <editor-fold defaultstate="collapsed" desc="Eventos">
+    
+    private void jmiInicioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiInicioMousePressed
+        cambiarPanel(OpcionesMenu.OVInicio);
+    }//GEN-LAST:event_jmiInicioMousePressed
 
-    private void jmiInicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiInicioMouseClicked
-        
-    }//GEN-LAST:event_jmiInicioMouseClicked
+    private void jmiMedicosRegistroMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiMedicosRegistroMousePressed
+        cambiarPanel(OpcionesMenu.OVMedicos);
+    }//GEN-LAST:event_jmiMedicosRegistroMousePressed
+
+    private void jmiSalirMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiSalirMousePressed
+        this.dispose();
+        System.exit(0);
+    }//GEN-LAST:event_jmiSalirMousePressed
+
+    private void jmiPacienteRegistroMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiPacienteRegistroMousePressed
+        cambiarPanel(OpcionesMenu.OVPacientes);
+    }//GEN-LAST:event_jmiPacienteRegistroMousePressed
+
+    private void jmiHistoricosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiHistoricosMousePressed
+        cambiarPanel(OpcionesMenu.OVHistoricos);
+    }//GEN-LAST:event_jmiHistoricosMousePressed
+    
     //</editor-fold> 
     
     // <editor-fold defaultstate="collapsed" desc="Métodos">
-    private void Inicializador(){
-        Session session = null;
-        Transaction transaction = null;
-        try{
-            session = SessionFactoryHelper.getSessionFactory().openSession();
-            /*transaction = session.beginTransaction();
-            //transaction.begin();
-            
-            Usuarios usuario = new Usuarios();
-            usuario.setNombres("Luis Jose 2");
-            usuario.setApellidoPaterno("Padilla 2");
-            usuario.setApellidoMaterno("Benitez 2");
-            usuario.setFechaNacimiento(new Date());
-            usuario.setSexo((short)0);
-            usuario.setRoles(new Roles(){{
-                this.setId(1);
-                this.setNombre("administrador");
-                this.setDescripcion("rol de administrador todos los privilegios.");
-            }});
-            session.save(usuario);
-            
-            transaction.commit();*/
-            
-            Query query = session.createQuery("from Usuarios");
-            List<Usuarios> list = query.list();
-            list.forEach(System.out::println);
-        }catch(Exception ex){
-            if(transaction != null){
-                transaction.rollback();
-            }
-        }finally{
-            if(session != null){
-                session.close();
-            }
+    
+    private void inicialialiacion(){
+        VInicio.getInstance().setSize(jpContenedor.getWidth(), jpContenedor.getHeight());
+        VMedicos.getInstance().setSize(jpContenedor.getWidth(), jpContenedor.getHeight());
+        VPacientes.getInstance().setSize(jpContenedor.getWidth(), jpContenedor.getHeight());
+        VConsultas.getInstance().setSize(jpContenedor.getWidth(), jpContenedor.getHeight());
+        VHistoricos.getInstance().setSize(jpContenedor.getWidth(), jpContenedor.getHeight());
+        
+        jpContenedor.add(VInicio.getInstance());
+        jpContenedor.add(VMedicos.getInstance());
+        jpContenedor.add(VPacientes.getInstance());
+        jpContenedor.add(VConsultas.getInstance());
+        jpContenedor.add(VHistoricos.getInstance());
+        
+        cambiarPanel(OpcionesMenu.OVInicio);
+    }
+    
+    private void cambiarPanel(OpcionesMenu opcion){
+        switch(opcion){
+            case OVInicio:
+                visualizarOpcionMenu(true, false, false, false, false);
+                break;
+            case OVMedicos:
+                visualizarOpcionMenu(false, true, false, false, false);
+                break;
+            case OVPacientes:
+                visualizarOpcionMenu(false, false, true, false, false);
+                break;
+            case OVConsultas:
+                visualizarOpcionMenu(false, false, false, true, false);
+                break;
+            case OVHistoricos:
+                visualizarOpcionMenu(false, false, false, false, true);
+                break;
         }
     }
-    // </editor-fold> 
+    
+    private void visualizarOpcionMenu(boolean inicio, boolean medicos, boolean pacientes, boolean consultas, boolean historicos){
+        VInicio.getInstance().setVisible(inicio);
+        VMedicos.getInstance().setVisible(medicos);
+        VPacientes.getInstance().setVisible(pacientes);
+        VConsultas.getInstance().setVisible(consultas);
+        VHistoricos.getInstance().setVisible(historicos);
+        validate();
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -170,33 +224,33 @@ public class Application extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Metal".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Application.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Application.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Application.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Application.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         
         ConfigurableApplicationContext context;
         context = new SpringApplicationBuilder(Application.class).headless(false).run(args);
-
+        
+        EventQueue.invokeLater(() -> {
+            SessionFactoryHelper.buidSessinFactory();
+        });
+        
         /* Create and display the form */
         EventQueue.invokeLater(() -> {
             Application windowApp = context.getBean(Application.class);
             windowApp.setVisible(true);
-            
         });
     }
-
+    
+    // </editor-fold> 
+    
+    // <editor-fold defaultstate="collapsed" desc="Variables">
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jmArchivo;
     private javax.swing.JMenu jmMedicos;
@@ -207,7 +261,8 @@ public class Application extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiMedicosRegistro;
     private javax.swing.JMenuItem jmiPacienteRegistro;
     private javax.swing.JMenuItem jmiSalir;
+    private javax.swing.JPanel jpContenedor;
     private javax.swing.JScrollPane jspContenedor;
     // End of variables declaration//GEN-END:variables
-
+    // </editor-fold> 
 }

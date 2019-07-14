@@ -11,13 +11,23 @@ package com.alzheimer.views;
  */
 public class VConsultas extends javax.swing.JPanel {
 
+    // <editor-fold defaultstate="collapsed" desc="Propiedades">
+    
+    private static VConsultas instance = null;
+    
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Constructores">
     /**
      * Creates new form VConsultas
      */
     public VConsultas() {
         initComponents();
+        inicializar();
     }
 
+    // </editor-fold>
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -40,6 +50,7 @@ public class VConsultas extends javax.swing.JPanel {
         jspDetalle = new javax.swing.JScrollPane();
         jpDetalle = new javax.swing.JPanel();
 
+        jToolBar.setFloatable(false);
         jToolBar.setRollover(true);
 
         btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/imagenes/new.png"))); // NOI18N
@@ -135,7 +146,22 @@ public class VConsultas extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-
+    // <editor-fold defaultstate="collapsed" desc="Métodos">
+    
+    public static VConsultas getInstance(){
+        if(instance == null){
+            instance = new VConsultas();
+        }
+        return instance;
+    }
+    
+    public void inicializar(){
+        
+    }
+    
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Variables">
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAbajo;
     private javax.swing.JButton btnArriba;
@@ -150,4 +176,5 @@ public class VConsultas extends javax.swing.JPanel {
     private javax.swing.JScrollPane jspLista;
     private javax.swing.JTable jtConsultas;
     // End of variables declaration//GEN-END:variables
+    // </editor-fold>
 }

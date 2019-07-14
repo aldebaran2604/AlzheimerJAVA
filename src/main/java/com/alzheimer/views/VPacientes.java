@@ -5,18 +5,32 @@
  */
 package com.alzheimer.views;
 
+import com.alzheimer.custom_controls.CustomTableModelPacientes;
+import com.alzheimer.models.Pacientes;
+
 /**
  *
  * @author aldebaran
  */
 public class VPacientes extends javax.swing.JPanel {
 
+    // <editor-fold defaultstate="collapsed" desc="Propiedades">
+    
+    private static VPacientes instance = null;
+    
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Constructores">
+    
     /**
      * Creates new form VPacientes
      */
     public VPacientes() {
         initComponents();
+        inicializar();
     }
+    
+    // </editor-fold>
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -53,6 +67,7 @@ public class VPacientes extends javax.swing.JPanel {
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
 
+        jToolBar.setFloatable(false);
         jToolBar.setRollover(true);
 
         btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/imagenes/new.png"))); // NOI18N
@@ -131,7 +146,7 @@ public class VPacientes extends javax.swing.JPanel {
 
         lbApellidoPaterno.setText("Apellido Paterno:");
 
-        lbApellidoMaterno.setText("Apellido Benitez:");
+        lbApellidoMaterno.setText("Apellido Materno:");
 
         lbFechaNacimiento.setText("Fecha de Nacimiento:");
 
@@ -222,7 +237,28 @@ public class VPacientes extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    // <editor-fold defaultstate="collapsed" desc="Métodos">
+    
+    public static VPacientes getInstance(){
+        if(instance == null){
+            instance = new VPacientes();
+        }
+        return instance;
+    }
+    
+    private void inicializar(){
+        cargarPacientes();
+    }
+    
+    private void cargarPacientes(){
+        jtPacientes.setModel(new CustomTableModelPacientes(){{
+            addRows(new Pacientes().getList());
+        }});
+    }
+    
+    // </editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Variables">
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAbajo;
     private javax.swing.JButton btnArriba;
@@ -250,4 +286,5 @@ public class VPacientes extends javax.swing.JPanel {
     private javax.swing.JLabel lbFechaNacimiento;
     private javax.swing.JLabel lbNombre;
     // End of variables declaration//GEN-END:variables
+    // </editor-fold>
 }
