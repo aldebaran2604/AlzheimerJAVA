@@ -8,6 +8,7 @@ package com.alzheimer.models;
 import com.alzheimer.utilities.SessionFactoryHelper;
 import java.util.ArrayList;
 import java.util.List;
+import static javafx.scene.input.KeyCode.T;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -17,15 +18,29 @@ import org.hibernate.query.Query;
  * @author aldebaran
  * @param <T>
  */
-public class Model<T> {
+public class Modelo<T> {
+    
+    public void delete(){
+        Session session = null;
+        try {
+            session = SessionFactoryHelper.getSessionFactory().openSession();
+            session.remove(this);
+        }catch(HibernateException ex){
+            System.err.println("Error in creating SessionFactory object." + ex.getMessage());
+        }finally{
+            if(session != null){
+                session.close();
+            }
+        }
+    }
     
     public void save(){
         Session session = null;
         try {
             session = SessionFactoryHelper.getSessionFactory().openSession();
-            session.save(this);
+            session.saveOrUpdate(this);
         }catch(HibernateException ex){
-            
+            System.err.println("Error in creating SessionFactory object." + ex.getMessage());
         }finally{
             if(session != null){
                 session.close();
