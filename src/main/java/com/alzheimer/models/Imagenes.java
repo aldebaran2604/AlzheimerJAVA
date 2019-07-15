@@ -2,12 +2,12 @@ package com.alzheimer.models;
 // Generated 29-jun-2019 21:11:18 by Hibernate Tools 4.3.1
 
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -19,37 +19,35 @@ import javax.persistence.Table;
 @Table(name="imagenes"
     ,catalog="alzheimerdb"
 )
-public class Imagenes extends Model<Imagenes>  implements java.io.Serializable {
+public class Imagenes extends Modelo<Imagenes>  implements java.io.Serializable {
 
 
-     private ImagenesId id;
+     private Integer id;
      private Pacientes pacientes;
-     private Parentescos parentescos;
+     private String parentesco;
      private String directorio;
      private String descripcion;
 
     public Imagenes() {
     }
 
-    public Imagenes(ImagenesId id, Pacientes pacientes, Parentescos parentescos, String directorio, String descripcion) {
+    public Imagenes(Integer id, Pacientes pacientes, String parentesco, String directorio, String descripcion) {
        this.id = id;
        this.pacientes = pacientes;
-       this.parentescos = parentescos;
+       this.parentesco = parentesco;
        this.directorio = directorio;
        this.descripcion = descripcion;
     }
    
-     @EmbeddedId
+     @Id @GeneratedValue(strategy=IDENTITY)
 
     
-    @AttributeOverrides( {
-        @AttributeOverride(name="parentescoId", column=@Column(name="parentesco_id", nullable=false) ), 
-        @AttributeOverride(name="pacienteId", column=@Column(name="paciente_id", nullable=false) ) } )
-    public ImagenesId getId() {
+    @Column(name="id", unique=true, nullable=false)
+    public Integer getId() {
         return this.id;
     }
     
-    public void setId(ImagenesId id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -63,14 +61,13 @@ public class Imagenes extends Model<Imagenes>  implements java.io.Serializable {
         this.pacientes = pacientes;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="parentesco_id", nullable=false, insertable=false, updatable=false)
-    public Parentescos getParentescos() {
-        return this.parentescos;
+    @Column(name="parentesco", nullable=false)
+    public String getParentescos() {
+        return this.parentesco;
     }
     
-    public void setParentescos(Parentescos parentescos) {
-        this.parentescos = parentescos;
+    public void setParentescos(String parentesco) {
+        this.parentesco = parentesco;
     }
 
     

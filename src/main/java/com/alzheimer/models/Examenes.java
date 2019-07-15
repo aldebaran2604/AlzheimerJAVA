@@ -22,7 +22,7 @@ import javax.persistence.TemporalType;
 @Table(name="examenes"
     ,catalog="alzheimerdb"
 )
-public class Examenes extends Model<Examenes> implements java.io.Serializable {
+public class Examenes extends Modelo<Examenes> implements java.io.Serializable {
 
 
      private Integer id;

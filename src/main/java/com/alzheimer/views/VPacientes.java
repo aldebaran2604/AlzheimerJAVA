@@ -6,7 +6,10 @@
 package com.alzheimer.views;
 
 import com.alzheimer.custom_controls.CustomTableModelPacientes;
+import com.alzheimer.models.Modelo;
 import com.alzheimer.models.Pacientes;
+import com.alzheimer.models.Roles;
+import org.springframework.ui.Model;
 
 /**
  *
@@ -62,10 +65,10 @@ public class VPacientes extends javax.swing.JPanel {
         lbApellidoMaterno = new javax.swing.JLabel();
         jtfApellicoMaterno = new javax.swing.JTextField();
         lbFechaNacimiento = new javax.swing.JLabel();
-        jtfFechaNacimiento = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
+        jftFechaNacimiento = new javax.swing.JFormattedTextField();
 
         jToolBar.setFloatable(false);
         jToolBar.setRollover(true);
@@ -74,7 +77,6 @@ public class VPacientes extends javax.swing.JPanel {
         btnNuevo.setToolTipText("Nuevo");
         btnNuevo.setFocusable(false);
         btnNuevo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnNuevo.setMargin(new java.awt.Insets(0, 0, 0, 0));
         btnNuevo.setMaximumSize(new java.awt.Dimension(24, 24));
         btnNuevo.setMinimumSize(new java.awt.Dimension(24, 24));
         btnNuevo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -84,7 +86,6 @@ public class VPacientes extends javax.swing.JPanel {
         btnEditar.setToolTipText("Editar");
         btnEditar.setFocusable(false);
         btnEditar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnEditar.setMargin(new java.awt.Insets(0, 0, 0, 0));
         btnEditar.setMaximumSize(new java.awt.Dimension(24, 24));
         btnEditar.setMinimumSize(new java.awt.Dimension(24, 24));
         btnEditar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -92,7 +93,6 @@ public class VPacientes extends javax.swing.JPanel {
 
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/imagenes/save.png"))); // NOI18N
         btnGuardar.setToolTipText("Guardar");
-        btnGuardar.setMargin(new java.awt.Insets(0, 0, 0, 0));
         btnGuardar.setMaximumSize(new java.awt.Dimension(24, 24));
         btnGuardar.setMinimumSize(new java.awt.Dimension(24, 24));
         jToolBar.add(btnGuardar);
@@ -101,7 +101,6 @@ public class VPacientes extends javax.swing.JPanel {
         btnBorrar.setToolTipText("Eliminar");
         btnBorrar.setFocusable(false);
         btnBorrar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnBorrar.setMargin(new java.awt.Insets(0, 0, 0, 0));
         btnBorrar.setMaximumSize(new java.awt.Dimension(24, 24));
         btnBorrar.setMinimumSize(new java.awt.Dimension(24, 24));
         btnBorrar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -111,7 +110,6 @@ public class VPacientes extends javax.swing.JPanel {
         btnArriba.setToolTipText("Subir");
         btnArriba.setFocusable(false);
         btnArriba.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnArriba.setMargin(new java.awt.Insets(0, 0, 0, 0));
         btnArriba.setMaximumSize(new java.awt.Dimension(24, 24));
         btnArriba.setMinimumSize(new java.awt.Dimension(24, 24));
         btnArriba.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -121,7 +119,6 @@ public class VPacientes extends javax.swing.JPanel {
         btnAbajo.setToolTipText("Bajar");
         btnAbajo.setFocusable(false);
         btnAbajo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnAbajo.setMargin(new java.awt.Insets(0, 0, 0, 0));
         btnAbajo.setMaximumSize(new java.awt.Dimension(24, 24));
         btnAbajo.setMinimumSize(new java.awt.Dimension(24, 24));
         btnAbajo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -131,7 +128,6 @@ public class VPacientes extends javax.swing.JPanel {
         btnConsultas.setToolTipText("Consultas");
         btnConsultas.setFocusable(false);
         btnConsultas.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnConsultas.setMargin(new java.awt.Insets(0, 0, 0, 0));
         btnConsultas.setMaximumSize(new java.awt.Dimension(24, 24));
         btnConsultas.setMinimumSize(new java.awt.Dimension(24, 24));
         btnConsultas.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -158,6 +154,8 @@ public class VPacientes extends javax.swing.JPanel {
         btngSexo.add(jRadioButton2);
         jRadioButton2.setText("Mujer");
 
+        jftFechaNacimiento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
+
         javax.swing.GroupLayout jpDetalleLayout = new javax.swing.GroupLayout(jpDetalle);
         jpDetalle.setLayout(jpDetalleLayout);
         jpDetalleLayout.setHorizontalGroup(
@@ -171,23 +169,21 @@ public class VPacientes extends javax.swing.JPanel {
                             .addComponent(lbApellidoPaterno)
                             .addComponent(lbApellidoMaterno))
                         .addGap(15, 15, 15)
-                        .addGroup(jpDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtfApellidoPaterno, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jtfNombre, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jtfApellicoMaterno, javax.swing.GroupLayout.Alignment.TRAILING)))
+                        .addGroup(jpDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jtfApellidoPaterno, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
+                            .addComponent(jtfNombre, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jtfApellicoMaterno))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jpDetalleLayout.createSequentialGroup()
-                        .addGroup(jpDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbFechaNacimiento)
-                            .addComponent(jLabel1))
-                        .addGroup(jpDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jpDetalleLayout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jRadioButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
-                                .addComponent(jRadioButton2))
-                            .addGroup(jpDetalleLayout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addComponent(jtfFechaNacimiento)))))
+                        .addComponent(lbFechaNacimiento)
+                        .addGap(18, 18, 18)
+                        .addComponent(jftFechaNacimiento))
+                    .addGroup(jpDetalleLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jRadioButton1)
+                        .addGap(39, 39, 39)
+                        .addComponent(jRadioButton2)))
                 .addGap(54, 54, 54))
         );
         jpDetalleLayout.setVerticalGroup(
@@ -208,13 +204,13 @@ public class VPacientes extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(jpDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbFechaNacimiento)
-                    .addComponent(jtfFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jftFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jpDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jRadioButton1)
                     .addComponent(jRadioButton2))
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
         jspDetalle.setViewportView(jpDetalle);
@@ -231,9 +227,9 @@ public class VPacientes extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE))
+                .addComponent(jTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -273,13 +269,13 @@ public class VPacientes extends javax.swing.JPanel {
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JTabbedPane jTabbedPane;
     private javax.swing.JToolBar jToolBar;
+    private javax.swing.JFormattedTextField jftFechaNacimiento;
     private javax.swing.JPanel jpDetalle;
     private javax.swing.JScrollPane jspDetalle;
     private javax.swing.JScrollPane jspLista;
     private javax.swing.JTable jtPacientes;
     private javax.swing.JTextField jtfApellicoMaterno;
     private javax.swing.JTextField jtfApellidoPaterno;
-    private javax.swing.JTextField jtfFechaNacimiento;
     private javax.swing.JTextField jtfNombre;
     private javax.swing.JLabel lbApellidoMaterno;
     private javax.swing.JLabel lbApellidoPaterno;

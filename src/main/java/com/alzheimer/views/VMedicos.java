@@ -6,13 +6,10 @@
 package com.alzheimer.views;
 
 import com.alzheimer.custom_controls.CustomTableModelMedicos;
+import com.alzheimer.models.Modelo;
 import com.alzheimer.models.Roles;
 import com.alzheimer.models.Usuarios;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -23,6 +20,10 @@ public class VMedicos extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Propiedades">
     
     private static VMedicos instance = null;
+    
+    CustomTableModelMedicos ctmm = new CustomTableModelMedicos();
+    
+    Usuarios usuario = null;
     
     // </editor-fold>
     
@@ -70,7 +71,7 @@ public class VMedicos extends javax.swing.JPanel {
         jrbHombre = new javax.swing.JRadioButton();
         jrbMujer = new javax.swing.JRadioButton();
         lbFechaNacimiento = new javax.swing.JLabel();
-        jtfFechaNacimiento = new javax.swing.JTextField();
+        jftFechaNacimiento = new javax.swing.JFormattedTextField();
 
         jToolBar.setFloatable(false);
         jToolBar.setRollover(true);
@@ -161,7 +162,7 @@ public class VMedicos extends javax.swing.JPanel {
 
         lbApellidoPaterno.setText("Apellido Paterno:");
 
-        lbApellidoMaterno.setText("Apellido Benitez:");
+        lbApellidoMaterno.setText("Apellido Materno:");
 
         jLabel1.setText("Sexo:");
 
@@ -173,6 +174,8 @@ public class VMedicos extends javax.swing.JPanel {
 
         lbFechaNacimiento.setText("Fecha de Nacimiento:");
 
+        jftFechaNacimiento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
+
         javax.swing.GroupLayout jpDetalleLayout = new javax.swing.GroupLayout(jpDetalle);
         jpDetalle.setLayout(jpDetalleLayout);
         jpDetalleLayout.setHorizontalGroup(
@@ -182,8 +185,8 @@ public class VMedicos extends javax.swing.JPanel {
                 .addGroup(jpDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpDetalleLayout.createSequentialGroup()
                         .addComponent(lbFechaNacimiento)
-                        .addGap(21, 21, 21)
-                        .addComponent(jtfFechaNacimiento))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jftFechaNacimiento))
                     .addGroup(jpDetalleLayout.createSequentialGroup()
                         .addGroup(jpDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbNombre)
@@ -220,7 +223,7 @@ public class VMedicos extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(jpDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbFechaNacimiento)
-                    .addComponent(jtfFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jftFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jpDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -245,35 +248,50 @@ public class VMedicos extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE))
+                .addComponent(jTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     // <editor-fold defaultstate="collapsed" desc="Eventos">
     
     private void btnNuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoMouseClicked
-        
+        jtfNombre.setText("");
+        jtfApellidoPaterno.setText("");
+        jtfApellicoMaterno.setText("");
+        jftFechaNacimiento.setValue(new Date());
+        jrbHombre.setSelected(true);
     }//GEN-LAST:event_btnNuevoMouseClicked
 
     private void btnEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseClicked
-        
+        if(jtMedicos.getSelectedRow() > -1){
+            Usuarios usuario = ctmm.getValue(jtMedicos.getSelectedRow() );
+            usuario.setNombres(jtfNombre.getText().trim());
+            usuario.setApellidoPaterno(jtfApellidoPaterno.getText().trim());
+            usuario.setApellidoMaterno(jtfApellicoMaterno.getText().trim());
+            usuario.setFechaNacimiento((Date)jftFechaNacimiento.getValue());
+            usuario.setSexo((short)(jrbHombre.isSelected()? 0 : 1));
+            usuario.save();;
+        }
     }//GEN-LAST:event_btnEditarMouseClicked
 
     private void btnGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseClicked
-        
-    }//GEN-LAST:event_btnGuardarMouseClicked
-
-    private void btnBorrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBorrarMouseClicked
         Usuarios medico = new Usuarios(){{
             setNombres(jtfNombre.getText().trim());
             setApellidoPaterno(jtfApellidoPaterno.getText().trim());
             setApellidoMaterno(jtfApellicoMaterno.getText().trim());
-            setFechaNacimiento(new Date());
-            Roles rol = new Roles();
-            this.setRoles(rol.getByID(2));
+            setFechaNacimiento((Date)jftFechaNacimiento.getValue());
+            setRoles(new Roles().getByID(2));
             setSexo((short)(jrbHombre.isSelected()? 0 : 1));
         }};
         medico.save();
+    }//GEN-LAST:event_btnGuardarMouseClicked
+
+    private void btnBorrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBorrarMouseClicked
+        if(jtMedicos.getSelectedRow() > -1){
+            usuario = ctmm.getValue(jtMedicos.getSelectedRow() );
+            usuario.delete();
+            cargarUsuarios();
+        }
     }//GEN-LAST:event_btnBorrarMouseClicked
 
      // </editor-fold>
@@ -289,12 +307,12 @@ public class VMedicos extends javax.swing.JPanel {
     
     private void inicializar(){
         cargarUsuarios();
+        jftFechaNacimiento.setValue(new Date());
     }
     
     private void cargarUsuarios(){
-        jtMedicos.setModel(new CustomTableModelMedicos(){{
-            addRows(new Usuarios().getList());
-        }});
+        ctmm.addRows(new Usuarios().getList());
+        jtMedicos.setModel(ctmm);
     }
     // </editor-fold>
 
@@ -310,6 +328,7 @@ public class VMedicos extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JTabbedPane jTabbedPane;
     private javax.swing.JToolBar jToolBar;
+    private javax.swing.JFormattedTextField jftFechaNacimiento;
     private javax.swing.JPanel jpDetalle;
     private javax.swing.JRadioButton jrbHombre;
     private javax.swing.JRadioButton jrbMujer;
@@ -318,7 +337,6 @@ public class VMedicos extends javax.swing.JPanel {
     private javax.swing.JTable jtMedicos;
     private javax.swing.JTextField jtfApellicoMaterno;
     private javax.swing.JTextField jtfApellidoPaterno;
-    private javax.swing.JTextField jtfFechaNacimiento;
     private javax.swing.JTextField jtfNombre;
     private javax.swing.JLabel lbApellidoMaterno;
     private javax.swing.JLabel lbApellidoPaterno;

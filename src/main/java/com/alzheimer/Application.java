@@ -5,6 +5,7 @@
  */
 package com.alzheimer;
 
+import com.alzheimer.models.Roles;
 import com.alzheimer.utilities.*;
 import com.alzheimer.views.*;
 import java.awt.EventQueue;

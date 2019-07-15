@@ -6,6 +6,7 @@
 package com.alzheimer.utilities;
 
 import com.alzheimer.models.*;
+import com.alzheimer.views.VPacientes;
 import java.io.File;
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
@@ -34,12 +35,11 @@ public class SessionFactoryHelper {
             config.configure(new File("src/main/resources/META-INF/hibernate.cfg.xml"));
             config.addAnnotatedClass(Usuarios.class);
             config.addAnnotatedClass(Roles.class);
-            config.addAnnotatedClass(Parentescos.class);
             config.addAnnotatedClass(Pacientes.class);
-            config.addAnnotatedClass(ImagenesId.class);
             config.addAnnotatedClass(Imagenes.class);
             config.addAnnotatedClass(Examenes.class);
             config.addAnnotatedClass(Consultas.class);
+            config.addAnnotatedClass(VPacientes.class);
 
             ServiceRegistry serviceRegistryObj = new StandardServiceRegistryBuilder().applySettings(config.getProperties()).build();
 

@@ -13,7 +13,6 @@ import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -25,7 +24,7 @@ import javax.persistence.TemporalType;
 @Table(name="usuarios"
     ,catalog="alzheimerdb"
 )
-public class Usuarios extends Model<Usuarios> implements java.io.Serializable {
+public class Usuarios extends Modelo<Usuarios> implements java.io.Serializable {
 
 
      private Integer id;
