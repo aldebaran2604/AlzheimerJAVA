@@ -26,10 +26,17 @@ CREATE TABLE `roles` (
 );
 
 CREATE TABLE `imagenes` (
+    `id` INTEGER AUTO_INCREMENT NOT NULL,
     `paciente_id` INTEGER NOT NULL,
-    `directorio` TEXT NOT NULL,
+    `directorio` VARCHAR(255) NOT NULL,
     `descripcion` VARCHAR(255) NOT NULL,
-    `parentesto` VARCHAR(30) NOT NULL
+    `parentesco` VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE `alzheimerdb`.`parentesco` (
+  `id` INTEGER NOT NULL AUTO_INCREMENT,
+  `descripcion` VARCHAR(50) NOT NULL,
+  PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `pacientes` (

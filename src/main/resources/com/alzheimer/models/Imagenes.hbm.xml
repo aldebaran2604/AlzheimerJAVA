@@ -4,25 +4,21 @@
 <!-- Generated 29-jun-2019 21:11:19 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="com.alzheimer.models.Imagenes" table="imagenes" catalog="alzheimerdb" optimistic-lock="version">
-        <composite-id name="id" class="com.alzheimer.models.ImagenesId">
-            <key-property name="parentescoId" type="int">
-                <column name="parentesco_id" />
-            </key-property>
-            <key-property name="pacienteId" type="int">
-                <column name="paciente_id" />
-            </key-property>
-        </composite-id>
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
         <many-to-one name="pacientes" class="com.alzheimer.models.Pacientes" update="false" insert="false" fetch="select">
             <column name="paciente_id" not-null="true" />
-        </many-to-one>
-        <many-to-one name="parentescos" class="com.alzheimer.models.Parentescos" update="false" insert="false" fetch="select">
-            <column name="parentesco_id" not-null="true" />
         </many-to-one>
         <property name="directorio" type="string">
             <column name="directorio" not-null="true" />
         </property>
         <property name="descripcion" type="string">
             <column name="descripcion" not-null="true" />
+        </property>
+        p<property name="parentesco" type="string">
+            <column name="parentesco" not-null="true" />
         </property>
     </class>
 </hibernate-mapping>

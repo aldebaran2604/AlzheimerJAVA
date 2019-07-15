@@ -14,12 +14,12 @@
     <property name="hibernate.hbm2ddl.auto">validate</property>
     <!-- Specifying Session Context -->
     <property name="hibernate.current_session_context_class">org.hibernate.context.internal.ThreadLocalSessionContext</property>
-    <mapping resource="com/alzheimer/models/Consultas.hbm.xml"/>
+    <!--<mapping resource="com/alzheimer/models/Consultas.hbm.xml"/>
     <mapping resource="com/alzheimer/models/Examenes.hbm.xml"/>
     <mapping resource="com/alzheimer/models/Pacientes.hbm.xml"/>
     <mapping resource="com/alzheimer/models/Usuarios.hbm.xml"/>
     <mapping resource="com/alzheimer/models/Imagenes.hbm.xml"/>
     <mapping resource="com/alzheimer/models/Parentescos.hbm.xml"/>
-    <mapping resource="com/alzheimer/models/Roles.hbm.xml"/>
+    <mapping resource="com/alzheimer/models/Roles.hbm.xml"/>-->
   </session-factory>
 </hibernate-configuration>
