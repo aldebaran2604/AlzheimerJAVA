@@ -137,6 +137,11 @@ public class Pacientes extends Modelo<Pacientes>  implements java.io.Serializabl
     }
 */
 
+    @Override
+    public String toString() {
+        return nombres + " " + apellidoPaterno + " " + apellidoMaterno;
+    }
+
 
 
 }

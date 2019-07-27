@@ -6,8 +6,8 @@
 package com.alzheimer.custom_controls;
 
 import com.alzheimer.models.Pacientes;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
  * @author aldebaran
  */
 public class CustomTableModelPacientes extends DefaultTableModel {
-    private final Vector<Pacientes> dataVector_ = new Vector<>();
+    private final ArrayList<Pacientes> dataList_ = new ArrayList<>();
     
     Class[] types = new Class [] {
         java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
@@ -34,6 +34,7 @@ public class CustomTableModelPacientes extends DefaultTableModel {
     }
     
     public void addRows(List<Pacientes> lista){
+        deleteRows();
         lista.forEach(this::addRow);
     }
     
@@ -42,13 +43,22 @@ public class CustomTableModelPacientes extends DefaultTableModel {
     }
     
     public void insertRow(int row, Pacientes paciente){
-        dataVector_.insertElementAt(paciente, row);
+        dataList_.add(row, paciente);
         addRow(getObject(paciente));
         fireTableRowsInserted(row, row);
     }
     
+    private void deleteRows(){
+        int sizeDataVector = getRowCount();
+        for(int index=sizeDataVector-1 ; index>=0; index--){
+            dataList_.remove(index);
+            removeRow(index);
+            fireTableRowsDeleted(index, index);
+        }
+    }
+    
     public Pacientes getValue(int row){
-        return dataVector_.get(row);
+        return dataList_.get(row);
     }
     
     private Object[] getObject(Pacientes paciente){
@@ -57,7 +67,7 @@ public class CustomTableModelPacientes extends DefaultTableModel {
     
     @Override
     public Object getValueAt(int row, int column) {
-        Pacientes usuario = dataVector_.get(row);
+        Pacientes usuario = dataList_.get(row);
         switch(column) {
             case 0: return usuario.getId();
             case 1: return usuario.getNombres();

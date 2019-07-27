@@ -47,7 +47,6 @@ public class SessionFactoryHelper {
             sessionFactory = config.buildSessionFactory(serviceRegistryObj);
         } catch (HibernateException e) {
             System.err.println("Error in creating SessionFactory object." + e.getMessage());
-            //throw new ExceptionInInitializerError(e);
         }
     }
     
