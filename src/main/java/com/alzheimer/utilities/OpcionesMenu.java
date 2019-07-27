@@ -14,7 +14,8 @@ public enum OpcionesMenu {
     OVMedicos(1, ""),
     OVPacientes(2, ""),
     OVConsultas(3, ""),
-    OVHistoricos(4, "");
+    OVHistoricos(4, ""),
+    OVImagenes(5, "");
     
     private int valor = 0;
     private String descripcion = "";
