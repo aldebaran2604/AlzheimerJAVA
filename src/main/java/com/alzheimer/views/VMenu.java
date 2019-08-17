@@ -6,13 +6,11 @@
 package com.alzheimer.views;
 
 import com.alzheimer.utilities.*;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  *
  * @author aldebaran
  */
-@SpringBootApplication
 public class VMenu extends javax.swing.JFrame {
     
     // <editor-fold defaultstate="collapsed" desc="Constructores">

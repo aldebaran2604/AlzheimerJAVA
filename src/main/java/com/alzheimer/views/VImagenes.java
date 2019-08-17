@@ -285,12 +285,15 @@ public class VImagenes extends javax.swing.JPanel {
     }//GEN-LAST:event_btnConsultasMouseClicked
 
     private void txtDirectorioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtDirectorioMouseClicked
-        JFileChooser fc=new JFileChooser();
-        FileNameExtensionFilter filtro = new FileNameExtensionFilter("*.JPG", "jpg");
-        fc.setFileFilter(filtro);
-        int seleccion = fc.showOpenDialog(this);
-        if(seleccion == JFileChooser.APPROVE_OPTION){
-            File fichero = fc.getSelectedFile();
+        Pacientes paciente = (Pacientes)jcmbPacientes.getSelectedItem();
+        if(paciente!= null){
+            JFileChooser fc = new JFileChooser();
+            FileNameExtensionFilter filtro = new FileNameExtensionFilter("*.JPG", "jpg");
+            fc.setFileFilter(filtro);
+            int seleccion = fc.showOpenDialog(this);
+            if(seleccion == JFileChooser.APPROVE_OPTION){
+                File fichero = fc.getSelectedFile();
+            }
         }
     }//GEN-LAST:event_txtDirectorioMouseClicked
 
@@ -306,8 +309,6 @@ public class VImagenes extends javax.swing.JPanel {
     }
     
     private void inicializar(){
-        
-        
         cargarImagenes();
     }
     
