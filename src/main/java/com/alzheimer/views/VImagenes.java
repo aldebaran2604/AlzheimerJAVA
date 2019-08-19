@@ -7,8 +7,16 @@ package com.alzheimer.views;
 
 import com.alzheimer.custom_controls.CustomTableModelImagenes;
 import com.alzheimer.models.Imagenes;
+import com.alzheimer.models.Modelo;
 import com.alzheimer.models.Pacientes;
+import com.alzheimer.utilities.Globals;
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -26,8 +34,6 @@ public class VImagenes extends javax.swing.JPanel {
     CustomTableModelImagenes ctmi = new CustomTableModelImagenes();
     
     private Imagenes imagen = new Imagenes();
-    
-    private String directorio = "";
     
     // </editor-fold>
     
@@ -54,7 +60,6 @@ public class VImagenes extends javax.swing.JPanel {
         btnActualizar = new javax.swing.JButton();
         btnArriba = new javax.swing.JButton();
         btnAbajo = new javax.swing.JButton();
-        btnConsultas = new javax.swing.JButton();
         jTabbedPane = new javax.swing.JTabbedPane();
         jspLista = new javax.swing.JScrollPane();
         jtImagenes = new javax.swing.JTable();
@@ -158,20 +163,6 @@ public class VImagenes extends javax.swing.JPanel {
         btnAbajo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar.add(btnAbajo);
 
-        btnConsultas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/imagenes/treatment.png"))); // NOI18N
-        btnConsultas.setToolTipText("Consultas");
-        btnConsultas.setFocusable(false);
-        btnConsultas.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnConsultas.setMaximumSize(new java.awt.Dimension(24, 24));
-        btnConsultas.setMinimumSize(new java.awt.Dimension(24, 24));
-        btnConsultas.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnConsultas.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnConsultasMouseClicked(evt);
-            }
-        });
-        jToolBar.add(btnConsultas);
-
         jtImagenes.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         jspLista.setViewportView(jtImagenes);
 
@@ -261,39 +252,78 @@ public class VImagenes extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Eventos">
     
     private void btnNuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoMouseClicked
-        
+        jcmbPacientes.setSelectedIndex(0);
+        txtDirectorio.setText("");
+        txtParentesco.setText("");
+        txtDescripcion.setText("");
+        imagen.setPacientes(null);
+        imagen.setId(0);
+        imagen.setDirectorio("");
+        imagen.setDescripcion("");
     }//GEN-LAST:event_btnNuevoMouseClicked
 
     private void btnEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseClicked
-        
+        if(jtImagenes.getSelectedRow() > -1){
+            imagen = ctmi.getValue(jtImagenes.getSelectedRow());
+            jcmbPacientes.setSelectedItem(imagen.getPacientes());
+            txtDirectorio.setText(imagen.getDirectorio());
+            txtParentesco.setText(imagen.getParentescos());
+            txtDescripcion.setText(imagen.getDescripcion());
+        }
     }//GEN-LAST:event_btnEditarMouseClicked
 
     private void btnGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseClicked
-        
+        imagen.setPacientes((Pacientes)jcmbPacientes.getSelectedItem());
+        imagen.setDirectorio(txtDirectorio.getText().trim());
+        imagen.setDescripcion(txtDescripcion.getText().trim());
+        imagen.setParentescos(txtParentesco.getText().trim());
+        if(imagen.getId() != null){
+            Modelo.save(getUpdateQuery(imagen));
+        }
+        else{
+            Modelo.save(getInsertQuery(imagen));
+        }
     }//GEN-LAST:event_btnGuardarMouseClicked
 
     private void btnBorrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBorrarMouseClicked
-        
+        if(jtImagenes.getSelectedRow() > -1){
+            imagen = ctmi.getValue(jtImagenes.getSelectedRow());
+            imagen.delete();
+            inicializar();
+        }
     }//GEN-LAST:event_btnBorrarMouseClicked
 
     private void btnActualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnActualizarMouseClicked
-        
+        inicializar();
     }//GEN-LAST:event_btnActualizarMouseClicked
-
-    private void btnConsultasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsultasMouseClicked
-
-    }//GEN-LAST:event_btnConsultasMouseClicked
 
     private void txtDirectorioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtDirectorioMouseClicked
         Pacientes paciente = (Pacientes)jcmbPacientes.getSelectedItem();
         if(paciente!= null){
+            int pacienteID = paciente.getId();
+            
             JFileChooser fc = new JFileChooser();
-            FileNameExtensionFilter filtro = new FileNameExtensionFilter("*.JPG", "jpg");
-            fc.setFileFilter(filtro);
+            fc.setFileFilter(new FileNameExtensionFilter("Images", "jpg", "png"));
             int seleccion = fc.showOpenDialog(this);
             if(seleccion == JFileChooser.APPROVE_OPTION){
-                File fichero = fc.getSelectedFile();
+                File origen = fc.getSelectedFile();
+                
+                File directorio = new File(Globals.getDirectorioImagenes() + "/" + pacienteID);
+                if(!directorio.exists()){
+                    directorio.mkdirs();
+                }
+                
+                File destino = new File(Globals.getDirectorioImagenes() + "/" + pacienteID + "/" + origen.getName());
+                
+                try {
+                    Files.copy(origen.toPath(), destino.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                } catch (IOException ex) {
+                    Logger.getLogger(VImagenes.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                txtDirectorio.setText("/" + pacienteID + "/" + origen.getName());
             }
+            
         }
     }//GEN-LAST:event_txtDirectorioMouseClicked
 
@@ -309,6 +339,7 @@ public class VImagenes extends javax.swing.JPanel {
     }
     
     private void inicializar(){
+        cargarPacientes();
         cargarImagenes();
     }
     
@@ -316,6 +347,33 @@ public class VImagenes extends javax.swing.JPanel {
         ctmi.addRows(imagen.getList());
         jtImagenes.setModel(ctmi);
         jtImagenes.repaint();
+    }
+    
+    private void cargarPacientes(){
+        List<Pacientes> pacientes = new Pacientes().getList();
+        pacientes.forEach(p->{
+            jcmbPacientes.addItem(p);
+        });
+    }
+    
+    private String getInsertQuery(Imagenes imagen){
+        StringBuilder query = new StringBuilder();
+            query.append("INSERT INTO imagenes")
+            .append(" (paciente_id, directorio, descripcion, parentesco) ")
+            .append(" VALUES ('").append(imagen.getPacientes().getId()).append("', '")
+            .append(imagen.getDirectorio()).append("', '").append(imagen.getDescripcion()).append("', '")
+            .append(imagen.getParentescos()).append("') ");
+
+        return query.toString();
+    }
+    
+    private String getUpdateQuery(Imagenes imagen){
+        StringBuilder query = new StringBuilder();
+        query.append(" UPDATE imagenes ")
+        .append(" SET directorio='").append(imagen.getDirectorio()).append("', descripcion='").append(imagen.getDescripcion()).append("', parentesco='").append(imagen.getParentescos()).append("' ")
+        .append(" WHERE id='2' ");
+
+        return query.toString();
     }
     
     // </editor-fold>
@@ -326,7 +384,6 @@ public class VImagenes extends javax.swing.JPanel {
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnArriba;
     private javax.swing.JButton btnBorrar;
-    private javax.swing.JButton btnConsultas;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnNuevo;

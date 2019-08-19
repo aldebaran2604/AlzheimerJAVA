@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
  * @author root
  */
 public class CustomTableModelImagenes extends DefaultTableModel {
-    private ArrayList<Imagenes> dataList_ = new ArrayList<>();
+    private final ArrayList<Imagenes> dataList_ = new ArrayList<>();
     
     Class[] types = new Class [] {
         java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
@@ -26,11 +26,11 @@ public class CustomTableModelImagenes extends DefaultTableModel {
     };
     
      public CustomTableModelImagenes() {
-        addColumn("ID");
-        addColumn("Paciente");
-        addColumn("Directorio");
-        addColumn("Parentesco");
-        addColumn("Descripción");
+        super.addColumn("ID");
+        super.addColumn("Paciente");
+        super.addColumn("Directorio");
+        super.addColumn("Parentesco");
+        super.addColumn("Descripción");
     }
      
      public void addRows(List<Imagenes> lista){
@@ -62,7 +62,7 @@ public class CustomTableModelImagenes extends DefaultTableModel {
     }
     
     private Object[] getObject(Imagenes imagen){
-        return new Object[]{ imagen.getId(), imagen.getPacientes().toString(), imagen.getDirectorio(), imagen.getParentescos(), imagen.getDescripcion() };
+        return new Object[]{ imagen.getId(), imagen.getPacientes().toString(), imagen.getDirectorio(), imagen.getParentescos(), imagen.getDescripcion() }; 
     }
     
     @Override

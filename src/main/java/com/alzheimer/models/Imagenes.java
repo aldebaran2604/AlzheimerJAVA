@@ -52,7 +52,7 @@ public class Imagenes extends Modelo<Imagenes>  implements java.io.Serializable 
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="paciente_id", nullable=false, insertable=false, updatable=false)
+    @JoinColumn(name="paciente_id", nullable=false)
     public Pacientes getPacientes() {
         return this.pacientes;
     }

@@ -96,7 +96,7 @@ public class Modelo<T> {
             System.err.println("Error in getList" + ex.getMessage());
         }finally{
             if(session != null){
-                session.close();
+                //session.close();
             }
         }
         return lista;
