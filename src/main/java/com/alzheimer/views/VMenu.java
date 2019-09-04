@@ -13,6 +13,12 @@ import com.alzheimer.utilities.*;
  */
 public class VMenu extends javax.swing.JFrame {
     
+    // <editor-fold defaultstate="collapsed" desc="Propiedades">
+    
+    private static VMenu instance = null;
+    
+    // </editor-fold>
+    
     // <editor-fold defaultstate="collapsed" desc="Constructores">
     /**
      * Creates new form Application
@@ -166,6 +172,13 @@ public class VMenu extends javax.swing.JFrame {
     //</editor-fold> 
     
     // <editor-fold defaultstate="collapsed" desc="Métodos">
+    
+    public static VMenu getInstance(){
+        if(instance == null){
+            instance = new VMenu();
+        }
+        return instance;
+    }
     
     private void inicialialiacion(){
         VInicio.getInstance().setSize(jpContenedor.getWidth(), jpContenedor.getHeight());

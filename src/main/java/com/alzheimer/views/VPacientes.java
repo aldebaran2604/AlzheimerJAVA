@@ -357,6 +357,11 @@ public class VPacientes extends javax.swing.JPanel {
         jtPacientes.repaint();
     }
     
+    private void inicialExamen(){
+        VExamen examen = new VExamen(VMenu.getInstance());
+        examen.setVisible(true);
+    }
+    
     private String getInsertQuery(Pacientes paciente){
         StringBuilder query = new StringBuilder();
         query.append("INSERT INTO ").append(paciente.getClass().getSimpleName().toLowerCase()).append("").
