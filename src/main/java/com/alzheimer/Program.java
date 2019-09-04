@@ -37,8 +37,7 @@ public class Program {
         
         /* Create and display the form */
         EventQueue.invokeLater(() -> {
-            VMenu windowApp = VMenu.getInstance();
-            windowApp.setVisible(true);
+            VMenu.getInstance().setVisible(true);
         });
     }
     

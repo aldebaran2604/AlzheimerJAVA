@@ -61,12 +61,12 @@
                 <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jmiPacienteRegistroMousePressed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jmiHistoricos">
+            <MenuItem class="javax.swing.JMenuItem" name="jmiConsultas">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Historicos"/>
+                <Property name="text" type="java.lang.String" value="Consultas"/>
               </Properties>
               <Events>
-                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jmiHistoricosMousePressed"/>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jmiConsultasMousePressed"/>
               </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jmiImagenes">

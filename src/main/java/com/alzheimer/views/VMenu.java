@@ -43,7 +43,7 @@ public class VMenu extends javax.swing.JFrame {
         jmiMedicosRegistro = new javax.swing.JMenuItem();
         jmPacientes = new javax.swing.JMenu();
         jmiPacienteRegistro = new javax.swing.JMenuItem();
-        jmiHistoricos = new javax.swing.JMenuItem();
+        jmiConsultas = new javax.swing.JMenuItem();
         jmiImagenes = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -108,13 +108,13 @@ public class VMenu extends javax.swing.JFrame {
         });
         jmPacientes.add(jmiPacienteRegistro);
 
-        jmiHistoricos.setText("Historicos");
-        jmiHistoricos.addMouseListener(new java.awt.event.MouseAdapter() {
+        jmiConsultas.setText("Consultas");
+        jmiConsultas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jmiHistoricosMousePressed(evt);
+                jmiConsultasMousePressed(evt);
             }
         });
-        jmPacientes.add(jmiHistoricos);
+        jmPacientes.add(jmiConsultas);
 
         jmiImagenes.setText("Imagenes");
         jmiImagenes.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -161,9 +161,9 @@ public class VMenu extends javax.swing.JFrame {
         cambiarPanel(OpcionesMenu.OVPacientes);
     }//GEN-LAST:event_jmiPacienteRegistroMousePressed
 
-    private void jmiHistoricosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiHistoricosMousePressed
-        cambiarPanel(OpcionesMenu.OVHistoricos);
-    }//GEN-LAST:event_jmiHistoricosMousePressed
+    private void jmiConsultasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiConsultasMousePressed
+        cambiarPanel(OpcionesMenu.OVConsultas);
+    }//GEN-LAST:event_jmiConsultasMousePressed
 
     private void jmiImagenesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiImagenesMousePressed
         cambiarPanel(OpcionesMenu.OVImagenes);
@@ -185,14 +185,12 @@ public class VMenu extends javax.swing.JFrame {
         VMedicos.getInstance().setSize(jpContenedor.getWidth(), jpContenedor.getHeight());
         VPacientes.getInstance().setSize(jpContenedor.getWidth(), jpContenedor.getHeight());
         VConsultas.getInstance().setSize(jpContenedor.getWidth(), jpContenedor.getHeight());
-        VHistoricos.getInstance().setSize(jpContenedor.getWidth(), jpContenedor.getHeight());
         VImagenes.getInstance().setSize(jpContenedor.getWidth(), jpContenedor.getHeight());
         
         jpContenedor.add(VInicio.getInstance());
         jpContenedor.add(VMedicos.getInstance());
         jpContenedor.add(VPacientes.getInstance());
         jpContenedor.add(VConsultas.getInstance());
-        jpContenedor.add(VHistoricos.getInstance());
         jpContenedor.add(VImagenes.getInstance());
         
         cambiarPanel(OpcionesMenu.OVInicio);
@@ -201,32 +199,28 @@ public class VMenu extends javax.swing.JFrame {
     private void cambiarPanel(OpcionesMenu opcion){
         switch(opcion){
             case OVInicio:
-                visualizarOpcionMenu(true, false, false, false, false, false);
+                visualizarOpcionMenu(true, false, false, false, false);
                 break;
             case OVMedicos:
-                visualizarOpcionMenu(false, true, false, false, false, false);
+                visualizarOpcionMenu(false, true, false, false, false);
                 break;
             case OVPacientes:
-                visualizarOpcionMenu(false, false, true, false, false, false);
+                visualizarOpcionMenu(false, false, true, false, false);
                 break;
             case OVConsultas:
-                visualizarOpcionMenu(false, false, false, true, false, false);
-                break;
-            case OVHistoricos:
-                visualizarOpcionMenu(false, false, false, false, true, false);
+                visualizarOpcionMenu(false, false, false, true, false);
                 break;
             case OVImagenes:
-                visualizarOpcionMenu(false, false, false, false, false, true);
+                visualizarOpcionMenu(false, false, false, false, true);
                 break;
         }
     }
     
-    private void visualizarOpcionMenu(boolean inicio, boolean medicos, boolean pacientes, boolean consultas, boolean historicos, boolean imagenes){
+    private void visualizarOpcionMenu(boolean inicio, boolean medicos, boolean pacientes, boolean consultas, boolean imagenes){
         VInicio.getInstance().setVisible(inicio);
         VMedicos.getInstance().setVisible(medicos);
         VPacientes.getInstance().setVisible(pacientes);
         VConsultas.getInstance().setVisible(consultas);
-        VHistoricos.getInstance().setVisible(historicos);
         VImagenes.getInstance().setVisible(imagenes);
         validate();
     }
@@ -239,7 +233,7 @@ public class VMenu extends javax.swing.JFrame {
     private javax.swing.JMenu jmMedicos;
     private javax.swing.JMenu jmPacientes;
     private javax.swing.JMenuBar jmbMenuOpciones;
-    private javax.swing.JMenuItem jmiHistoricos;
+    private javax.swing.JMenuItem jmiConsultas;
     private javax.swing.JMenuItem jmiImagenes;
     private javax.swing.JMenuItem jmiInicio;
     private javax.swing.JMenuItem jmiMedicosRegistro;
