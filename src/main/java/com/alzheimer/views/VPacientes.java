@@ -51,7 +51,6 @@ public class VPacientes extends javax.swing.JPanel {
         btnActualizar = new javax.swing.JButton();
         btnArriba = new javax.swing.JButton();
         btnAbajo = new javax.swing.JButton();
-        btnConsultas = new javax.swing.JButton();
         jTabbedPane = new javax.swing.JTabbedPane();
         jspLista = new javax.swing.JScrollPane();
         jtPacientes = new javax.swing.JTable();
@@ -157,20 +156,6 @@ public class VPacientes extends javax.swing.JPanel {
         btnAbajo.setMinimumSize(new java.awt.Dimension(24, 24));
         btnAbajo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar.add(btnAbajo);
-
-        btnConsultas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/imagenes/treatment.png"))); // NOI18N
-        btnConsultas.setToolTipText("Consultas");
-        btnConsultas.setFocusable(false);
-        btnConsultas.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnConsultas.setMaximumSize(new java.awt.Dimension(24, 24));
-        btnConsultas.setMinimumSize(new java.awt.Dimension(24, 24));
-        btnConsultas.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnConsultas.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnConsultasMouseClicked(evt);
-            }
-        });
-        jToolBar.add(btnConsultas);
 
         jtPacientes.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         jspLista.setViewportView(jtPacientes);
@@ -332,10 +317,6 @@ public class VPacientes extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnBorrarMouseClicked
 
-    private void btnConsultasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsultasMouseClicked
-        
-    }//GEN-LAST:event_btnConsultasMouseClicked
-
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="Métodos">
@@ -355,11 +336,6 @@ public class VPacientes extends javax.swing.JPanel {
         ctmp.addRows(paciente.getList());
         jtPacientes.setModel(ctmp);
         jtPacientes.repaint();
-    }
-    
-    private void inicialExamen(){
-        VExamen examen = new VExamen(VMenu.getInstance());
-        examen.setVisible(true);
     }
     
     private String getInsertQuery(Pacientes paciente){
@@ -392,7 +368,6 @@ public class VPacientes extends javax.swing.JPanel {
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnArriba;
     private javax.swing.JButton btnBorrar;
-    private javax.swing.JButton btnConsultas;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnNuevo;

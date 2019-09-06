@@ -25,12 +25,12 @@ public class CustomTableModelPacientes extends DefaultTableModel {
     };
 
     public CustomTableModelPacientes() {
-        addColumn("ID");
-        addColumn("Nombre");
-        addColumn("Apellido Paterno");
-        addColumn("Apellido Materno");
-        addColumn("Fecha de Nacimiento");
-        addColumn("Sexo");
+        super.addColumn("ID");
+        super.addColumn("Nombre");
+        super.addColumn("Apellido Paterno");
+        super.addColumn("Apellido Materno");
+        super.addColumn("Fecha de Nacimiento");
+        super.addColumn("Sexo");
     }
     
     public void addRows(List<Pacientes> lista){

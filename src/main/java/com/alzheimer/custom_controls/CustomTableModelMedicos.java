@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
  * @author aldebaran
  */
 public class CustomTableModelMedicos extends DefaultTableModel {
-    private ArrayList<Usuarios> dataList_ = new ArrayList<>();
+    private final ArrayList<Usuarios> dataList_ = new ArrayList<>();
     
     Class[] types = new Class [] {
         java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
@@ -25,12 +25,12 @@ public class CustomTableModelMedicos extends DefaultTableModel {
     };
 
     public CustomTableModelMedicos() {
-        addColumn("ID");
-        addColumn("Nombre");
-        addColumn("Apellido Paterno");
-        addColumn("Apellido Materno");
-        addColumn("Fecha de Nacimiento");
-        addColumn("Sexo");
+        super.addColumn("ID");
+        super.addColumn("Nombre");
+        super.addColumn("Apellido Paterno");
+        super.addColumn("Apellido Materno");
+        super.addColumn("Fecha de Nacimiento");
+        super.addColumn("Sexo");
     }
     
     public void addRows(List<Usuarios> lista){

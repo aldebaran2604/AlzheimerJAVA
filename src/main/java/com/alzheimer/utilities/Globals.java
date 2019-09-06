@@ -22,7 +22,7 @@ public final class Globals {
                     directorioImagenes = "/home/aldebaran/Pictures";
                     break;
                 case "Windows":
-                    directorioImagenes = "";
+                    directorioImagenes = "C:\\Users\\aldebaran\\Pictures";
                     break;
             }
         }

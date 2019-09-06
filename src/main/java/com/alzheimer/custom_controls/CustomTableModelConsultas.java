@@ -6,8 +6,8 @@
 package com.alzheimer.custom_controls;
 
 import com.alzheimer.models.Consultas;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
  * @author aldebaran
  */
 public class CustomTableModelConsultas extends DefaultTableModel {
-    private final Vector<Consultas> dataVector_ = new Vector<>();
+    private final ArrayList<Consultas> dataList_ = new ArrayList<>();
     
     Class[] types = new Class [] {
         java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
@@ -26,13 +26,14 @@ public class CustomTableModelConsultas extends DefaultTableModel {
     };
 
     public CustomTableModelConsultas() {
-        addColumn("ID");
-        addColumn("Medico");
-        addColumn("Paciente");
-        addColumn("Fecha de Consulta");
+        super.addColumn("ID");
+        super.addColumn("Medico");
+        super.addColumn("Paciente");
+        super.addColumn("Fecha de Consulta");
     }
     
     public void addRows(List<Consultas> lista){
+        deleteRows();
         lista.forEach(this::addRow);
     }
     
@@ -41,13 +42,22 @@ public class CustomTableModelConsultas extends DefaultTableModel {
     }
     
     public void insertRow(int row, Consultas consulta){
-        dataVector_.insertElementAt(consulta, row);
+        dataList_.add(row, consulta);
         addRow(getObject(consulta));
         fireTableRowsInserted(row, row);
     }
     
+    private void deleteRows(){
+        int sizeDataVector = getRowCount();
+        for(int index=sizeDataVector-1 ; index>=0; index--){
+            dataList_.remove(index);
+            removeRow(index);
+            fireTableRowsDeleted(index, index);
+        }
+    }
+    
     public Consultas getValue(int row){
-        return dataVector_.get(row);
+        return dataList_.get(row);
     }
     
     private Object[] getObject(Consultas consulta){
@@ -56,7 +66,7 @@ public class CustomTableModelConsultas extends DefaultTableModel {
     
     @Override
     public Object getValueAt(int row, int column) {
-        Consultas consulta = dataVector_.get(row);
+        Consultas consulta = dataList_.get(row);
         switch(column) {
             case 0: return consulta.getId();
             case 1: return consulta.getUsuarios().getNombres();
