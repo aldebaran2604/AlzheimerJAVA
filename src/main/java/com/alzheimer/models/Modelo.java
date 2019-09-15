@@ -33,7 +33,7 @@ public class Modelo<T> {
             System.err.println("Error in delete" + ex.getMessage());
         }finally{
             if(session != null){
-                session.close();
+                //session.close();
             }
         }
     }
@@ -47,7 +47,7 @@ public class Modelo<T> {
             System.err.println("Error in save" + ex.getMessage());
         }finally{
             if(session != null){
-                session.close();
+                //session.close();
             }
         }
     }
@@ -64,7 +64,7 @@ public class Modelo<T> {
             System.err.println("Error in save" + ex.getMessage());
         }finally{
             if(session != null){
-                session.close();
+                //session.close();
             }
         }
     }
@@ -79,7 +79,7 @@ public class Modelo<T> {
             System.err.println("Error in getByID" + ex.getMessage());
         }finally{
             if(session != null){
-                session.close();
+                //session.close();
             }
         }
         return result;
