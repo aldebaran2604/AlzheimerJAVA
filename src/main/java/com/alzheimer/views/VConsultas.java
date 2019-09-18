@@ -6,8 +6,13 @@
 package com.alzheimer.views;
 
 import com.alzheimer.custom_controls.CustomTableModelConsultas;
+import com.alzheimer.custom_controls.CustomTableModelExamenes;
 import com.alzheimer.models.Consultas;
+import com.alzheimer.models.Examenes;
 import com.alzheimer.models.Pacientes;
+import com.alzheimer.utilities.Globals;
+import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -19,8 +24,10 @@ public class VConsultas extends javax.swing.JPanel {
     
     private static VConsultas instance = null;
     
-    private CustomTableModelConsultas ctmc = new CustomTableModelConsultas();
+    private final CustomTableModelConsultas ctmc = new CustomTableModelConsultas();
+    private final CustomTableModelExamenes ctme = new CustomTableModelExamenes();
     private Consultas consulta = new Consultas();
+    private final Examenes examen = new Examenes();
     
     // </editor-fold>
     
@@ -52,9 +59,9 @@ public class VConsultas extends javax.swing.JPanel {
         jspDetalle = new javax.swing.JScrollPane();
         jpDetalle = new javax.swing.JPanel();
         lbPaciente = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jcmbPacientes = new javax.swing.JComboBox<>();
         lbFecha = new javax.swing.JLabel();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        jftFecha = new javax.swing.JFormattedTextField();
         jspDetalleConsultas = new javax.swing.JScrollPane();
         jtDetale = new javax.swing.JTable();
 
@@ -178,7 +185,7 @@ public class VConsultas extends javax.swing.JPanel {
 
         lbFecha.setText("Fecha:");
 
-        jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy-MM-dd"))));
+        jftFecha.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy-MM-dd"))));
 
         jtDetale.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         jspDetalleConsultas.setViewportView(jtDetale);
@@ -190,15 +197,15 @@ public class VConsultas extends javax.swing.JPanel {
             .addGroup(jpDetalleLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(jpDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jspDetalleConsultas, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
+                    .addComponent(jspDetalleConsultas, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(jpDetalleLayout.createSequentialGroup()
                         .addGroup(jpDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbPaciente)
                             .addComponent(lbFecha))
                         .addGap(18, 18, 18)
                         .addGroup(jpDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jftFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jcmbPacientes, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
         jpDetalleLayout.setVerticalGroup(
@@ -207,11 +214,11 @@ public class VConsultas extends javax.swing.JPanel {
                 .addGap(21, 21, 21)
                 .addGroup(jpDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbPaciente)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcmbPacientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
                 .addGroup(jpDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbFecha)
-                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jftFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jspDetalleConsultas, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
                 .addContainerGap(180, Short.MAX_VALUE))
@@ -240,19 +247,36 @@ public class VConsultas extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Eventos">
     
     private void btnNuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoMouseClicked
-        // TODO add your handling code here:
+        jcmbPacientes.setSelectedIndex(0);
+        jftFecha.setValue(new Date());
+        consulta.setId(null);
+        consulta.setPacientes(null);
+        consulta.setUsuarios(null);
+        consulta.setFecha(new Date());
     }//GEN-LAST:event_btnNuevoMouseClicked
 
     private void btnEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseClicked
-        // TODO add your handling code here:
+        obtenerListaExamenes();
+        if(jtConsultas.getSelectedRow() > -1){
+            consulta = ctmc.getValue(jtConsultas.getSelectedRow());
+            jcmbPacientes.setSelectedItem(consulta.getPacientes());
+            jftFecha.setValue(consulta.getFecha());
+        }
     }//GEN-LAST:event_btnEditarMouseClicked
 
     private void btnGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseClicked
-        // TODO add your handling code here:
+        consulta.setPacientes((Pacientes)jcmbPacientes.getSelectedItem());
+        consulta.setUsuarios(Globals.medico);
+        consulta.setFecha((Date)jftFecha.getValue());
+        inicializar();
     }//GEN-LAST:event_btnGuardarMouseClicked
 
     private void btnBorrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBorrarMouseClicked
-        // TODO add your handling code here:
+        if(jtConsultas.getSelectedRow() > -1){
+            consulta = ctmc.getValue(jtConsultas.getSelectedRow());
+            consulta.delete();
+            inicializar();
+        }
     }//GEN-LAST:event_btnBorrarMouseClicked
 
     private void btnConsultasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsultasMouseClicked
@@ -260,7 +284,7 @@ public class VConsultas extends javax.swing.JPanel {
     }//GEN-LAST:event_btnConsultasMouseClicked
 
     private void btnActualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnActualizarMouseClicked
-        cargarConsultas();
+        inicializar();
     }//GEN-LAST:event_btnActualizarMouseClicked
 
     // </editor-fold>
@@ -276,6 +300,7 @@ public class VConsultas extends javax.swing.JPanel {
     
     private void inicializar(){
         cargarConsultas();
+        cargarPacientes();
     }
     
     private void cargarConsultas(){
@@ -284,9 +309,32 @@ public class VConsultas extends javax.swing.JPanel {
         jtConsultas.repaint();
     }
     
+    private void cargarPacientes(){
+        jcmbPacientes.removeAllItems();
+        List<Pacientes> pacientes = new Pacientes().getList();
+        pacientes.forEach(p->{
+            jcmbPacientes.addItem(p);
+        });
+        jcmbPacientes.repaint();
+    }
+    
     private void iniciarExamen(){
-        VExamen examen = new VExamen(VMenu.getInstance());
-        examen.setVisible(true);
+        if(jtConsultas.getSelectedRow() > -1){
+            VExamen vexamenModal = new VExamen(VMenu.getInstance(), ctme.getValue(jtConsultas.getSelectedRow()).getId());
+            vexamenModal.setVisible(true);
+        }
+    }
+    
+    private void obtenerListaExamenes(){
+        if(jtConsultas.getSelectedRow() > -1){
+            String where = "where consulta_id = " + ctme.getValue(jtConsultas.getSelectedRow()).getId();
+            ctme.addRows(examen.getListaByWhere(where));
+            jtDetale.setModel(ctme);
+            jtDetale.repaint();
+        } else {
+            jtDetale.setModel(ctme);
+            jtDetale.repaint();
+        }
     }
     
     // </editor-fold>
@@ -301,10 +349,10 @@ public class VConsultas extends javax.swing.JPanel {
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnNuevo;
-    private javax.swing.JComboBox<Pacientes> jComboBox1;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JTabbedPane jTabbedPane;
     private javax.swing.JToolBar jToolBar;
+    private javax.swing.JComboBox<Pacientes> jcmbPacientes;
+    private javax.swing.JFormattedTextField jftFecha;
     private javax.swing.JPanel jpDetalle;
     private javax.swing.JScrollPane jspDetalle;
     private javax.swing.JScrollPane jspDetalleConsultas;

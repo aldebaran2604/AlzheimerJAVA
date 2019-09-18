@@ -101,4 +101,22 @@ public class Modelo<T> {
         }
         return lista;
     }
+    
+    public List<T> getListaByWhere(String where){
+        List<T> lista = new ArrayList<>();
+        Session session = null;
+        try {
+            session = SessionFactoryHelper.getSessionFactory().openSession();
+            String queryWhere = "from " + this.getClass().getSimpleName() + where;
+            Query query = session.createQuery(queryWhere);
+            lista = query.list();
+        }catch(HibernateException ex){
+            System.err.println("Error in getList" + ex.getMessage());
+        }finally{
+            if(session != null){
+                //session.close();
+            }
+        }
+        return lista;
+    }
 }

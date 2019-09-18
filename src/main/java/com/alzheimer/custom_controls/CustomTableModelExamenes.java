@@ -18,15 +18,20 @@ public class CustomTableModelExamenes extends DefaultTableModel  {
     private final ArrayList<Examenes> dataList_ = new ArrayList<>();
     
     Class[] types = new Class [] {
-        
+        java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
     };
     
     boolean[] canEdit = new boolean [] {
-        
+        false, false, false, false, false, false
     };
 
     public CustomTableModelExamenes() {
-        
+        super.addColumn("ID");
+        super.addColumn("Fechas");
+        super.addColumn("Hora Inicio");
+        super.addColumn("Hora Final");
+        super.addColumn("Aciertos");
+        super.addColumn("Errores");
     }
     
     public void addRows(List<Examenes> lista){
@@ -58,13 +63,19 @@ public class CustomTableModelExamenes extends DefaultTableModel  {
     }
     
     private Object[] getObject(Examenes examen){
-        return new Object[]{ };
+        return new Object[]{ examen.getId(), examen.getFecha(), examen.getHoraInicio(), examen.getHoraFinal(), examen.getTotalAciertos(), examen.getTotalErrores() };
     }
     
     @Override
     public Object getValueAt(int row, int column) {
         Examenes examen = dataList_.get(row);
         switch(column) {
+            case 0: return examen.getId();
+            case 1: return examen.getFecha();
+            case 2: return examen.getHoraInicio();
+            case 3: return examen.getHoraFinal();
+            case 4: return examen.getTotalAciertos();
+            case 5: return examen.getTotalErrores();
             default: return null;
         }
     }

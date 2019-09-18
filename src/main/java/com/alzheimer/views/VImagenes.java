@@ -257,7 +257,7 @@ public class VImagenes extends javax.swing.JPanel {
         txtParentesco.setText("");
         txtDescripcion.setText("");
         imagen.setPacientes(null);
-        imagen.setId(0);
+        imagen.setId(null);
         imagen.setDirectorio("");
         imagen.setDescripcion("");
     }//GEN-LAST:event_btnNuevoMouseClicked
@@ -350,10 +350,12 @@ public class VImagenes extends javax.swing.JPanel {
     }
     
     private void cargarPacientes(){
+        jcmbPacientes.removeAllItems();
         List<Pacientes> pacientes = new Pacientes().getList();
         pacientes.forEach(p->{
             jcmbPacientes.addItem(p);
         });
+        jcmbPacientes.repaint();
     }
     
     private String getInsertQuery(Imagenes imagen){
