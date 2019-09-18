@@ -9,12 +9,14 @@ SET FOREIGN_KEY_CHECKS = 1;
 
 CREATE TABLE `usuarios` (
     `id` INTEGER AUTO_INCREMENT NOT NULL,
+    `nombre_usuario` VARCHAR(20) NOT NULL,
     `nombres` VARCHAR(50) NOT NULL,
     `apellido_paterno` VARCHAR(50) NOT NULL,
     `apellido_materno` VARCHAR(50) NOT NULL,
     `fecha_nacimiento` DATE NOT NULL,
     `sexo` SMALLINT(1) NOT NULL,
     `rol_id` INTEGER NOT NULL,
+    `password` VARCHAR(100) NOT NULL,
     PRIMARY KEY (`id`)
 );
 
@@ -30,14 +32,15 @@ CREATE TABLE `imagenes` (
     `paciente_id` INTEGER NOT NULL,
     `directorio` VARCHAR(255) NOT NULL,
     `descripcion` VARCHAR(255) NOT NULL,
-    `parentesco` VARCHAR(30) NOT NULL
+    `parentesco` VARCHAR(30) NOT NULL,
+     PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `alzheimerdb`.`parentesco` (
-  `id` INTEGER NOT NULL AUTO_INCREMENT,
-  `descripcion` VARCHAR(50) NOT NULL,
-  PRIMARY KEY (`id`)
-);
+#CREATE TABLE `parentesco` (
+#  `id` INTEGER NOT NULL AUTO_INCREMENT,
+#  `descripcion` VARCHAR(50) NOT NULL,
+#  PRIMARY KEY (`id`)
+#);
 
 CREATE TABLE `pacientes` (
     `id` INTEGER AUTO_INCREMENT NOT NULL,

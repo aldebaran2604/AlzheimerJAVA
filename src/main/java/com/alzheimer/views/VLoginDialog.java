@@ -5,6 +5,10 @@
  */
 package com.alzheimer.views;
 
+import com.alzheimer.models.Usuarios;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import javax.swing.JOptionPane;
 
 /**
@@ -80,10 +84,6 @@ public class VLoginDialog extends javax.swing.JDialog {
             }
         });
 
-        txtUsuario.setText("jPasswordField1");
-
-        txtPassword.setText("jPasswordField1");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -157,6 +157,19 @@ public class VLoginDialog extends javax.swing.JDialog {
     
     private boolean validarLogin(){
         return false;
+    }
+    
+    private String getWhereQuery(String nombreUsuario, String password){
+        return "where nombre_usuario = " + nombreUsuario+ " and password = "+ password;
+    }
+    
+    private Usuarios obtenerUsuarioRegistrado(String nombreUsuario, String password){
+        Usuarios consultaUsuaro = new Usuarios();
+        Optional<Usuarios> usuario = consultaUsuaro.getListaByWhere(getWhereQuery("", ""))
+                .stream().filter(u -> u.getNombreUsuario().equals(nombreUsuario) && u.getPassword().equals(password))
+                .findFirst();
+        
+        return usuario.orElse(null);
     }
     
     // </editor-fold>

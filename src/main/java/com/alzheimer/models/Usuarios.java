@@ -30,22 +30,26 @@ public class Usuarios extends Modelo<Usuarios> implements java.io.Serializable {
      private Integer id;
      private Roles roles;
      private String nombres;
+     private String nombreUsuario;
      private String apellidoPaterno;
      private String apellidoMaterno;
      private Date fechaNacimiento;
      private short sexo;
+     private String password;
      private Set consultases = new HashSet(0);
 
     public Usuarios() {
     }
 
 	
-    public Usuarios(Roles roles, String nombres, String apellidoPaterno, String apellidoMaterno, Date fechaNacimiento, short sexo) {
+    public Usuarios(Roles roles, String nombres, String nombreUsuario, String apellidoPaterno, String apellidoMaterno, Date fechaNacimiento, short sexo, String password) {
         this.roles = roles;
         this.nombres = nombres;
+        this.nombreUsuario = nombreUsuario;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
         this.fechaNacimiento = fechaNacimiento;
+        this.password = password;
         this.sexo = sexo;
     }
     /*public Usuarios(Roles roles, String nombres, String apellidoPaterno, String apellidoMaterno, Date fechaNacimiento, short sexo, Set consultases) {
@@ -89,7 +93,15 @@ public class Usuarios extends Modelo<Usuarios> implements java.io.Serializable {
     public void setNombres(String nombres) {
         this.nombres = nombres;
     }
-
+    
+    @Column(name="nombre_usuario", nullable=false, length=20)
+    public String getNombreUsuario(){
+        return this.nombreUsuario;
+    }
+    
+    public void setNombreUsuario(String nombreUsuario){
+        this.nombreUsuario = nombreUsuario;
+    }
     
     @Column(name="apellido_paterno", nullable=false, length=50)
     public String getApellidoPaterno() {
@@ -99,7 +111,6 @@ public class Usuarios extends Modelo<Usuarios> implements java.io.Serializable {
     public void setApellidoPaterno(String apellidoPaterno) {
         this.apellidoPaterno = apellidoPaterno;
     }
-
     
     @Column(name="apellido_materno", nullable=false, length=50)
     public String getApellidoMaterno() {
@@ -128,6 +139,15 @@ public class Usuarios extends Modelo<Usuarios> implements java.io.Serializable {
     
     public void setSexo(short sexo) {
         this.sexo = sexo;
+    }
+    
+    @Column(name="password", nullable=false, length=100)
+    public String getPassword(){
+        return this.password;
+    }
+    
+    public void setPassword(String password){
+        this.password = password;
     }
 
 /*@OneToMany(fetch=FetchType.LAZY, mappedBy="usuarios")
