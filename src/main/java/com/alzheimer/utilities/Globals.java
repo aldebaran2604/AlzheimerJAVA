@@ -9,10 +9,10 @@ import com.alzheimer.models.Usuarios;
 
 /**
  *
- * @author root
+ * @author aldebaran
  */
 public final class Globals {
-    public static Usuarios medico = null;
+    public static Usuarios usuario = null;
     private static String directorioImagenes = null;
     
     public static String getDirectorioImagenes(){

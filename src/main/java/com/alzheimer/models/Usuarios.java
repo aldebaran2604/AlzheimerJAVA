@@ -158,13 +158,11 @@ public class Usuarios extends Modelo<Usuarios> implements java.io.Serializable {
     public void setConsultases(Set consultases) {
         this.consultases = consultases;
     }
-
-
 */
 
     @Override
     public String toString() {
-        return "Usuarios{" + "id=" + id + ", roles=" + roles + ", nombres=" + nombres + ", apellidoPaterno=" + apellidoPaterno + ", apellidoMaterno=" + apellidoMaterno + ", fechaNacimiento=" + fechaNacimiento + ", sexo=" + sexo + '}';
+        return nombres + " " + apellidoPaterno + " " + apellidoMaterno;
     }
     
 }

@@ -10,11 +10,12 @@ package com.alzheimer.utilities;
  * @author aldebaran
  */
 public enum OpcionesMenu {
-    OVInicio(0, ""),
-    OVMedicos(1, ""),
-    OVPacientes(2, ""),
-    OVConsultas(3, ""),
-    OVImagenes(4, "");
+    OVNinguno(0, ""),
+    OVInicio(1, ""),
+    OVMedicos(2, ""),
+    OVPacientes(3, ""),
+    OVConsultas(4, ""),
+    OVImagenes(5, "");
     
     private int valor = 0;
     private String descripcion = "";

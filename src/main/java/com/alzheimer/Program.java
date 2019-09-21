@@ -6,6 +6,7 @@
 package com.alzheimer;
 
 import com.alzheimer.utilities.SessionFactoryHelper;
+import com.alzheimer.views.VLoginDialog;
 import com.alzheimer.views.VMenu;
 import java.awt.EventQueue;
 
@@ -37,7 +38,13 @@ public class Program {
         
         /* Create and display the form */
         EventQueue.invokeLater(() -> {
-            VMenu.getInstance().setVisible(true);
+            VLoginDialog login = new VLoginDialog(VMenu.getInstance());
+            if(login.verificacion()){
+                VMenu.getInstance().setVisible(true);
+                VMenu.getInstance().mostrarInicio();
+            }else{
+                VMenu.getInstance().dispose();
+            }
         });
     }
     

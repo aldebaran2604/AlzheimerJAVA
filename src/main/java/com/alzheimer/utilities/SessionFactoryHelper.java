@@ -15,7 +15,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
 /**
- *  Clase para el manejo de las 
+ *  Clase para el manejo de la sesión de la base de datos
  * @author aldebaran
  */
 public class SessionFactoryHelper {

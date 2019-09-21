@@ -6,8 +6,7 @@
 package com.alzheimer.views;
 
 import com.alzheimer.models.Usuarios;
-import java.util.ArrayList;
-import java.util.List;
+import com.alzheimer.utilities.Globals;
 import java.util.Optional;
 import javax.swing.JOptionPane;
 
@@ -18,7 +17,9 @@ import javax.swing.JOptionPane;
 public class VLoginDialog extends javax.swing.JDialog {
 
     // <editor-fold defaultstate="collapsed" desc="Propiedades">
+    
     private boolean verificacion = false;
+    
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="Constructores">
@@ -135,6 +136,7 @@ public class VLoginDialog extends javax.swing.JDialog {
             verificacion = true;
             this.dispose();
         }else{
+            verificacion = false;
             JOptionPane.showMessageDialog(null, "¡Usuario y/o contraseña son incorrectos!", null, JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnAceptarMouseClicked
@@ -156,16 +158,18 @@ public class VLoginDialog extends javax.swing.JDialog {
     }
     
     private boolean validarLogin(){
-        return false;
+        Usuarios usuario = obtenerUsuarioRegistrado(String.valueOf(txtUsuario.getPassword()), String.valueOf(txtPassword.getPassword()));
+        Globals.usuario = usuario;
+        return usuario != null;
     }
     
     private String getWhereQuery(String nombreUsuario, String password){
-        return "where nombre_usuario = " + nombreUsuario+ " and password = "+ password;
+        return " where nombre_usuario = '" + nombreUsuario+ "' and password = '"+ password + "'";
     }
     
     private Usuarios obtenerUsuarioRegistrado(String nombreUsuario, String password){
         Usuarios consultaUsuaro = new Usuarios();
-        Optional<Usuarios> usuario = consultaUsuaro.getListaByWhere(getWhereQuery("", ""))
+        Optional<Usuarios> usuario = consultaUsuaro.getListaByWhere(getWhereQuery(nombreUsuario, password))
                 .stream().filter(u -> u.getNombreUsuario().equals(nombreUsuario) && u.getPassword().equals(password))
                 .findFirst();
         

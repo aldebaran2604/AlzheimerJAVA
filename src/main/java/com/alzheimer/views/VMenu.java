@@ -213,7 +213,15 @@ public class VMenu extends javax.swing.JFrame {
             case OVImagenes:
                 visualizarOpcionMenu(false, false, false, false, true);
                 break;
+            default:
+                visualizarOpcionMenu(false, false, false, false, false);
+                break;
         }
+    }
+    
+    public void mostrarInicio(){
+        cambiarPanel(OpcionesMenu.OVNinguno);
+        cambiarPanel(OpcionesMenu.OVInicio);
     }
     
     private void visualizarOpcionMenu(boolean inicio, boolean medicos, boolean pacientes, boolean consultas, boolean imagenes){
