@@ -58,8 +58,6 @@ public class VImagenes extends javax.swing.JPanel {
         btnGuardar = new javax.swing.JButton();
         btnBorrar = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
-        btnArriba = new javax.swing.JButton();
-        btnAbajo = new javax.swing.JButton();
         jTabbedPane = new javax.swing.JTabbedPane();
         jspLista = new javax.swing.JScrollPane();
         jtImagenes = new javax.swing.JTable();
@@ -144,24 +142,6 @@ public class VImagenes extends javax.swing.JPanel {
             }
         });
         jToolBar.add(btnActualizar);
-
-        btnArriba.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/imagenes/up.png"))); // NOI18N
-        btnArriba.setToolTipText("Subir");
-        btnArriba.setFocusable(false);
-        btnArriba.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnArriba.setMaximumSize(new java.awt.Dimension(24, 24));
-        btnArriba.setMinimumSize(new java.awt.Dimension(24, 24));
-        btnArriba.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar.add(btnArriba);
-
-        btnAbajo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/imagenes/down.png"))); // NOI18N
-        btnAbajo.setToolTipText("Bajar");
-        btnAbajo.setFocusable(false);
-        btnAbajo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnAbajo.setMaximumSize(new java.awt.Dimension(24, 24));
-        btnAbajo.setMinimumSize(new java.awt.Dimension(24, 24));
-        btnAbajo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar.add(btnAbajo);
 
         jtImagenes.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         jspLista.setViewportView(jtImagenes);
@@ -382,9 +362,7 @@ public class VImagenes extends javax.swing.JPanel {
     
     // <editor-fold defaultstate="collapsed" desc="Variables">
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAbajo;
     private javax.swing.JButton btnActualizar;
-    private javax.swing.JButton btnArriba;
     private javax.swing.JButton btnBorrar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnGuardar;
