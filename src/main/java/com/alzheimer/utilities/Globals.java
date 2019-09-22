@@ -28,4 +28,6 @@ public final class Globals {
         }
         return directorioImagenes;
     }
+    
+    public static String stringEmpty = "";
 }

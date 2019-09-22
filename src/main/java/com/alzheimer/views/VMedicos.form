@@ -204,30 +204,38 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Component id="lbFechaNacimiento" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jftFechaNacimiento" max="32767" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="lbSexo" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
+                                  <Component id="jrbHombre" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace pref="57" max="32767" attributes="0"/>
+                                  <Component id="jrbMujer" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="lbNombre" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="lbApellidoPaterno" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="lbApellidoMaterno" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lbNombreUsuario" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jtfApellidoPaterno" alignment="1" max="32767" attributes="0"/>
                                       <Component id="jtfApellicoMaterno" alignment="1" max="32767" attributes="0"/>
                                       <Component id="jtfNombre" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jtfNombreUsuario" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
-                                  <Component id="jrbHombre" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="57" max="32767" attributes="0"/>
-                                  <Component id="jrbMujer" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="lbFechaNacimiento" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lbPassword" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jpfPassword" max="32767" attributes="0"/>
+                                      <Component id="jftFechaNacimiento" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                           <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
@@ -237,7 +245,12 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lbNombreUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jtfNombreUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="lbNombre" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jtfNombre" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -257,13 +270,18 @@
                               <Component id="lbFechaNacimiento" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jftFechaNacimiento" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbPassword" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jpfPassword" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lbSexo" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jrbHombre" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jrbMujer" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="61" max="32767" attributes="0"/>
+                          <EmptySpace pref="37" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -290,7 +308,7 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="jtfApellicoMaterno">
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel1">
+                <Component class="javax.swing.JLabel" name="lbSexo">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Sexo:"/>
                   </Properties>
@@ -326,6 +344,20 @@
                       <Format format="yyyy-MM-dd" subtype="-1" type="1"/>
                     </Property>
                   </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="lbNombreUsuario">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Usuario:"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="jtfNombreUsuario">
+                </Component>
+                <Component class="javax.swing.JLabel" name="lbPassword">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Clave:"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JPasswordField" name="jpfPassword">
                 </Component>
               </SubComponents>
             </Container>

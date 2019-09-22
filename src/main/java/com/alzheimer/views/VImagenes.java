@@ -233,13 +233,13 @@ public class VImagenes extends javax.swing.JPanel {
     
     private void btnNuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoMouseClicked
         jcmbPacientes.setSelectedIndex(0);
-        txtDirectorio.setText("");
-        txtParentesco.setText("");
-        txtDescripcion.setText("");
+        txtDirectorio.setText(Globals.stringEmpty);
+        txtParentesco.setText(Globals.stringEmpty);
+        txtDescripcion.setText(Globals.stringEmpty);
         imagen.setPacientes(null);
         imagen.setId(null);
-        imagen.setDirectorio("");
-        imagen.setDescripcion("");
+        imagen.setDirectorio(Globals.stringEmpty);
+        imagen.setDescripcion(Globals.stringEmpty);
     }//GEN-LAST:event_btnNuevoMouseClicked
 
     private void btnEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseClicked
@@ -352,8 +352,10 @@ public class VImagenes extends javax.swing.JPanel {
     private String getUpdateQuery(Imagenes imagen){
         StringBuilder query = new StringBuilder();
         query.append(" UPDATE imagenes ")
-        .append(" SET directorio='").append(imagen.getDirectorio()).append("', descripcion='").append(imagen.getDescripcion()).append("', parentesco='").append(imagen.getParentescos()).append("' ")
-        .append(" WHERE id='2' ");
+        .append(" SET directorio='").append(imagen.getDirectorio())
+        .append("', descripcion='").append(imagen.getDescripcion())
+        .append("', parentesco='").append(imagen.getParentescos()).append("' ")
+        .append(" WHERE id='").append(imagen.getId()).append("' ");
 
         return query.toString();
     }

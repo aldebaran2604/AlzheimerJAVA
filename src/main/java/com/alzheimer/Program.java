@@ -40,10 +40,13 @@ public class Program {
         EventQueue.invokeLater(() -> {
             VLoginDialog login = new VLoginDialog(VMenu.getInstance());
             if(login.verificacion()){
+                login.dispose();
                 VMenu.getInstance().setVisible(true);
                 VMenu.getInstance().mostrarInicio();
             }else{
+                login.dispose();
                 VMenu.getInstance().dispose();
+                System.exit(0);
             }
         });
     }

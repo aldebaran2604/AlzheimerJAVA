@@ -178,6 +178,7 @@ public class VLoginDialog extends javax.swing.JDialog {
     
     // </editor-fold>
     
+    // <editor-fold defaultstate="collapsed" desc="Variables">
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnCancelar;
@@ -187,4 +188,5 @@ public class VLoginDialog extends javax.swing.JDialog {
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JPasswordField txtUsuario;
     // End of variables declaration//GEN-END:variables
+    // </editor-fold>
 }

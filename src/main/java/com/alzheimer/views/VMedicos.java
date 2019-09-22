@@ -9,6 +9,7 @@ import com.alzheimer.custom_controls.CustomTableModelMedicos;
 import com.alzheimer.models.Modelo;
 import com.alzheimer.models.Roles;
 import com.alzheimer.models.Usuarios;
+import com.alzheimer.utilities.Globals;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -63,11 +64,15 @@ public class VMedicos extends javax.swing.JPanel {
         jtfApellidoPaterno = new javax.swing.JTextField();
         lbApellidoMaterno = new javax.swing.JLabel();
         jtfApellicoMaterno = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
+        lbSexo = new javax.swing.JLabel();
         jrbHombre = new javax.swing.JRadioButton();
         jrbMujer = new javax.swing.JRadioButton();
         lbFechaNacimiento = new javax.swing.JLabel();
         jftFechaNacimiento = new javax.swing.JFormattedTextField();
+        lbNombreUsuario = new javax.swing.JLabel();
+        jtfNombreUsuario = new javax.swing.JTextField();
+        lbPassword = new javax.swing.JLabel();
+        jpfPassword = new javax.swing.JPasswordField();
 
         jToolBar.setFloatable(false);
         jToolBar.setRollover(true);
@@ -155,7 +160,7 @@ public class VMedicos extends javax.swing.JPanel {
 
         lbApellidoMaterno.setText("Apellido Materno:");
 
-        jLabel1.setText("Sexo:");
+        lbSexo.setText("Sexo:");
 
         btngSexo.add(jrbHombre);
         jrbHombre.setSelected(true);
@@ -168,6 +173,10 @@ public class VMedicos extends javax.swing.JPanel {
 
         jftFechaNacimiento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy-MM-dd"))));
 
+        lbNombreUsuario.setText("Usuario:");
+
+        lbPassword.setText("Clave:");
+
         javax.swing.GroupLayout jpDetalleLayout = new javax.swing.GroupLayout(jpDetalle);
         jpDetalle.setLayout(jpDetalleLayout);
         jpDetalleLayout.setHorizontalGroup(
@@ -176,31 +185,41 @@ public class VMedicos extends javax.swing.JPanel {
                 .addGap(28, 28, 28)
                 .addGroup(jpDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpDetalleLayout.createSequentialGroup()
-                        .addComponent(lbFechaNacimiento)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jftFechaNacimiento))
+                        .addComponent(lbSexo)
+                        .addGap(93, 93, 93)
+                        .addComponent(jrbHombre)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                        .addComponent(jrbMujer))
                     .addGroup(jpDetalleLayout.createSequentialGroup()
                         .addGroup(jpDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbNombre)
                             .addComponent(lbApellidoPaterno)
-                            .addComponent(lbApellidoMaterno))
+                            .addComponent(lbApellidoMaterno)
+                            .addComponent(lbNombreUsuario))
                         .addGap(15, 15, 15)
                         .addGroup(jpDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jtfApellidoPaterno, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jtfApellicoMaterno, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jtfNombre)))
+                            .addComponent(jtfNombre)
+                            .addComponent(jtfNombreUsuario)))
                     .addGroup(jpDetalleLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(93, 93, 93)
-                        .addComponent(jrbHombre)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
-                        .addComponent(jrbMujer)))
+                        .addGroup(jpDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbFechaNacimiento)
+                            .addComponent(lbPassword))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jpDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jpfPassword)
+                            .addComponent(jftFechaNacimiento))))
                 .addGap(54, 54, 54))
         );
         jpDetalleLayout.setVerticalGroup(
             jpDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpDetalleLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addGap(16, 16, 16)
+                .addGroup(jpDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbNombreUsuario)
+                    .addComponent(jtfNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jpDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbNombre)
                     .addComponent(jtfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -216,12 +235,16 @@ public class VMedicos extends javax.swing.JPanel {
                 .addGroup(jpDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbFechaNacimiento)
                     .addComponent(jftFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jpDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
+                    .addComponent(lbPassword)
+                    .addComponent(jpfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(7, 7, 7)
+                .addGroup(jpDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbSexo)
                     .addComponent(jrbHombre)
                     .addComponent(jrbMujer))
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         jspDetalle.setViewportView(jpDetalle);
@@ -247,26 +270,32 @@ public class VMedicos extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Eventos">
     
     private void btnNuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoMouseClicked
-        jtfNombre.setText("");
-        jtfApellidoPaterno.setText("");
-        jtfApellicoMaterno.setText("");
+        jtfNombreUsuario.setText(Globals.stringEmpty);
+        jtfNombre.setText(Globals.stringEmpty);
+        jtfApellidoPaterno.setText(Globals.stringEmpty);
+        jtfApellicoMaterno.setText(Globals.stringEmpty);
         jftFechaNacimiento.setValue(new Date());
+        jpfPassword.setText(Globals.stringEmpty);
         jrbHombre.setSelected(true);
         medico.setId(null);
-        medico.setNombres("");
-        medico.setApellidoPaterno("");
-        medico.setApellidoMaterno("");
+        medico.setNombreUsuario(Globals.stringEmpty);
+        medico.setNombres(Globals.stringEmpty);
+        medico.setApellidoPaterno(Globals.stringEmpty);
+        medico.setApellidoMaterno(Globals.stringEmpty);
         medico.setFechaNacimiento(new Date());
+        medico.setPassword(Globals.stringEmpty);
         medico.setSexo((short)0);
     }//GEN-LAST:event_btnNuevoMouseClicked
 
     private void btnEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseClicked
         if(jtMedicos.getSelectedRow() > -1){
             medico = ctmm.getValue(jtMedicos.getSelectedRow());
+            jtfNombreUsuario.setText(medico.getNombreUsuario());
             jtfNombre.setText(medico.getNombres());
             jtfApellidoPaterno.setText(medico.getApellidoPaterno());
             jtfApellicoMaterno.setText(medico.getApellidoMaterno());
             jftFechaNacimiento.setValue(medico.getFechaNacimiento());
+            jpfPassword.setText(medico.getPassword());
             if(medico.getSexo() == 0) {
                 jrbHombre.setSelected(true);
             }
@@ -277,11 +306,13 @@ public class VMedicos extends javax.swing.JPanel {
     }//GEN-LAST:event_btnEditarMouseClicked
 
     private void btnGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseClicked
+        medico.setNombreUsuario(jtfNombreUsuario.getText().trim());
         medico.setNombres(jtfNombre.getText().trim());
         medico.setApellidoPaterno(jtfApellidoPaterno.getText().trim());
         medico.setApellidoMaterno(jtfApellicoMaterno.getText().trim());
         medico.setFechaNacimiento((Date)jftFechaNacimiento.getValue());
         medico.setRoles(rolMedico);
+        medico.setPassword(String.valueOf(jpfPassword.getPassword()));
         medico.setSexo((short)(jrbHombre.isSelected()? 0 : 1));
         if(medico.getId() != null){
             Modelo.save(getUpdateQuery(medico));
@@ -329,23 +360,29 @@ public class VMedicos extends javax.swing.JPanel {
     private String getInsertQuery(Usuarios usurio){
         StringBuilder query = new StringBuilder();
         query.append("INSERT INTO ").append(usurio.getClass().getSimpleName().toLowerCase()).append("").
-            append(" (nombres, apellido_paterno, apellido_materno, fecha_nacimiento, sexo, rol_id)").
-            append(" VALUES ('").append(usurio.getNombres()).append("', '").append(usurio.getApellidoPaterno()).
-            append("', '").append(usurio.getApellidoMaterno()).append("', '").append(new SimpleDateFormat("yyyy-MM-dd").format(usurio.getFechaNacimiento())).
-            append("', '").append(usurio.getSexo()).append("', '").append(usurio.getRoles().getId()).append("')");
+            append(" (nombre_usuario, nombres, apellido_paterno, apellido_materno, fecha_nacimiento, sexo, password, rol_id)").
+            append(" VALUES ('").append(usurio.getNombreUsuario()).append("', '").
+            append(usurio.getNombres()).append("', '").append(usurio.getApellidoPaterno()).
+            append("', '").append(usurio.getApellidoMaterno()).append("', '").
+            append(new SimpleDateFormat("yyyy-MM-dd").format(usurio.getFechaNacimiento())).
+            append("', '").append(usurio.getSexo()).
+            append("', '").append(usurio.getPassword()).
+            append("', '").append(usurio.getRoles().getId()).append("')");
         return query.toString();
     }
     
     private String getUpdateQuery(Usuarios usurio){
         StringBuilder query = new StringBuilder();
         query.append("UPDATE ").append(usurio.getClass().getSimpleName().toLowerCase()).append("").
-            append(" SET nombres='").append(usurio.getNombres()). append("',").
-            append(" apellido_paterno='").append(usurio.getApellidoPaterno()).append("',").
-            append(" apellido_materno='").append(usurio.getApellidoMaterno()).append("',").
-            append(" fecha_nacimiento='").append(new SimpleDateFormat("yyyy-MM-dd").format(usurio.getFechaNacimiento())).append("',").
-            append(" sexo='").append(usurio.getSexo()).append("',").
-            append(" rol_id='").append(usurio.getRoles().getId()).append("'").
-            append(" WHERE `id`='").append(usurio.getId()).append("'");
+            append(" SET nombres_usuario = '").append(usurio.getNombreUsuario()). append("',").
+            append(" nombres='").append(usurio.getNombres()). append("',").
+            append(" apellido_paterno = '").append(usurio.getApellidoPaterno()).append("', ").
+            append(" apellido_materno = '").append(usurio.getApellidoMaterno()).append("', ").
+            append(" fecha_nacimiento = '").append(new SimpleDateFormat("yyyy-MM-dd").format(usurio.getFechaNacimiento())).append("', ").
+            append(" sexo = '").append(usurio.getSexo()).append("', ").
+            append(" password = '").append(usurio.getPassword()).append("', ").
+            append(" rol_id = '").append(usurio.getRoles().getId()).append("'").
+            append(" WHERE id = '").append(usurio.getId()).append("'");
         return query.toString();
     }
     
@@ -359,11 +396,11 @@ public class VMedicos extends javax.swing.JPanel {
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnNuevo;
     private javax.swing.ButtonGroup btngSexo;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JTabbedPane jTabbedPane;
     private javax.swing.JToolBar jToolBar;
     private javax.swing.JFormattedTextField jftFechaNacimiento;
     private javax.swing.JPanel jpDetalle;
+    private javax.swing.JPasswordField jpfPassword;
     private javax.swing.JRadioButton jrbHombre;
     private javax.swing.JRadioButton jrbMujer;
     private javax.swing.JScrollPane jspDetalle;
@@ -372,10 +409,14 @@ public class VMedicos extends javax.swing.JPanel {
     private javax.swing.JTextField jtfApellicoMaterno;
     private javax.swing.JTextField jtfApellidoPaterno;
     private javax.swing.JTextField jtfNombre;
+    private javax.swing.JTextField jtfNombreUsuario;
     private javax.swing.JLabel lbApellidoMaterno;
     private javax.swing.JLabel lbApellidoPaterno;
     private javax.swing.JLabel lbFechaNacimiento;
     private javax.swing.JLabel lbNombre;
+    private javax.swing.JLabel lbNombreUsuario;
+    private javax.swing.JLabel lbPassword;
+    private javax.swing.JLabel lbSexo;
     // End of variables declaration//GEN-END:variables
     // </editor-fold>
 }

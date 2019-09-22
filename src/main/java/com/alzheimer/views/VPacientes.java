@@ -8,6 +8,7 @@ package com.alzheimer.views;
 import com.alzheimer.custom_controls.CustomTableModelPacientes;
 import com.alzheimer.models.Modelo;
 import com.alzheimer.models.Pacientes;
+import com.alzheimer.utilities.Globals;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -245,15 +246,15 @@ public class VPacientes extends javax.swing.JPanel {
     }//GEN-LAST:event_btnActualizarMouseClicked
 
     private void btnNuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoMouseClicked
-        jtfNombre.setText("");
-        jtfApellidoPaterno.setText("");
-        jtfApellicoMaterno.setText("");
+        jtfNombre.setText(Globals.stringEmpty);
+        jtfApellidoPaterno.setText(Globals.stringEmpty);
+        jtfApellicoMaterno.setText(Globals.stringEmpty);
         jftFechaNacimiento.setValue(new Date());
         jrbHombre.setSelected(true);
         paciente.setId(null);
-        paciente.setNombres("");
-        paciente.setApellidoPaterno("");
-        paciente.setApellidoMaterno("");
+        paciente.setNombres(Globals.stringEmpty);
+        paciente.setApellidoPaterno(Globals.stringEmpty);
+        paciente.setApellidoMaterno(Globals.stringEmpty);
         paciente.setFechaNacimiento(new Date());
         paciente.setSexo((short)0);
     }//GEN-LAST:event_btnNuevoMouseClicked
