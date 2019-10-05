@@ -9,8 +9,10 @@ import com.alzheimer.custom_controls.CustomTableModelConsultas;
 import com.alzheimer.custom_controls.CustomTableModelExamenes;
 import com.alzheimer.models.Consultas;
 import com.alzheimer.models.Examenes;
+import com.alzheimer.models.Modelo;
 import com.alzheimer.models.Pacientes;
 import com.alzheimer.utilities.Globals;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -246,6 +248,11 @@ public class VConsultas extends javax.swing.JPanel {
         consulta.setPacientes((Pacientes)jcmbPacientes.getSelectedItem());
         consulta.setUsuarios(Globals.usuario);
         consulta.setFecha((Date)jftFecha.getValue());
+        if(consulta.getId() != null){
+            Modelo.save(getUpdateQuery(consulta));
+        } else {
+            Modelo.save(getInsertQuery(consulta));
+        }
         inicializar();
     }//GEN-LAST:event_btnGuardarMouseClicked
 
@@ -298,7 +305,7 @@ public class VConsultas extends javax.swing.JPanel {
     
     private void iniciarExamen(){
         if(jtConsultas.getSelectedRow() > -1){
-            VExamen vexamenModal = new VExamen(VMenu.getInstance(), ctme.getValue(jtConsultas.getSelectedRow()).getId());
+            VExamen vexamenModal = new VExamen(VMenu.getInstance(), ctmc.getValue(jtConsultas.getSelectedRow()));
             vexamenModal.setVisible(true);
         }
     }
@@ -313,6 +320,26 @@ public class VConsultas extends javax.swing.JPanel {
             jtDetale.setModel(ctme);
             jtDetale.repaint();
         }
+    }
+    
+    private String getInsertQuery(Consultas consulta){
+        StringBuilder query = new StringBuilder();
+        query.append("INSERT INTO ").append(consulta.getClass().getSimpleName().toLowerCase()).
+            append(" (usuario_id, paciente_id, fecha) VALUES ('").
+            append(consulta.getUsuarios().getId()).append("', '").
+            append(consulta.getPacientes().getId()).append("', '").
+            append(new SimpleDateFormat("yyyy-MM-dd").format(consulta.getFecha())).append("') ");
+        return query.toString();
+    }
+    
+    private String getUpdateQuery(Consultas consulta){
+        StringBuilder query = new StringBuilder();
+        query.append("UPDATE ").append(consulta.getClass().getSimpleName().toLowerCase()).
+            append(" SET usuario_id='").append(consulta.getUsuarios().getId()).
+            append("', paciente_id='").append(consulta.getPacientes().getId()).
+            append("', fecha='").append(new SimpleDateFormat("yyyy-MM-dd").format(consulta.getFecha())).
+            append("' WHERE id='").append(consulta.getId()).append("'");
+        return query.toString();
     }
     
     // </editor-fold>
